@@ -5,23 +5,23 @@ import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const navItems = [
-  { href: "/", label: "首页" },
-  { href: "/courses", label: "课程" },
-  { href: "/insights", label: "表达洞察" },
-  { href: "/contact", label: "联系" },
+  { href: "/", label: "Home" },
+  { href: "/courses", label: "Courses" },
+  { href: "/insights", label: "Insights" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Brand() {
   return (
-    <Link className="brand" href="/" aria-label="声场 VOXFIELD 首页">
+    <Link className="brand" href="/" aria-label="VOXFIELD home">
       <span className="brand-mark" aria-hidden="true">
         <span />
         <span />
         <span />
       </span>
       <span className="brand-copy">
-        <strong>声场</strong>
-        <small>VOXFIELD</small>
+        <strong>VOXFIELD</strong>
+        <small>SPEAK WITH IMPACT</small>
       </span>
     </Link>
   );
@@ -46,7 +46,7 @@ export function SiteHeader() {
   }, [menuOpen]);
 
   const showDemoNotice = () => {
-    setNotice("案例演示暂未连接真实学员账户");
+    setNotice("This case-study demo is not connected to a real student account.");
     window.setTimeout(() => setNotice(""), 3200);
   };
 
@@ -58,7 +58,7 @@ export function SiteHeader() {
           <nav
             id="primary-navigation"
             className={menuOpen ? "primary-nav is-open" : "primary-nav"}
-            aria-label="主导航"
+            aria-label="Primary navigation"
           >
             {navItems.map((item) => {
               const active =
@@ -77,10 +77,10 @@ export function SiteHeader() {
               );
             })}
             <button className="nav-login" type="button" onClick={showDemoNotice}>
-              学员入口
+              Student Login
             </button>
             <Link className="button button-small button-amber" href="/contact">
-              预约公开课
+              Book a Class
             </Link>
           </nav>
           <button
@@ -88,7 +88,7 @@ export function SiteHeader() {
             type="button"
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
-            aria-label={menuOpen ? "关闭导航菜单" : "打开导航菜单"}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setMenuOpen((open) => !open)}
           >
             <span />
@@ -111,10 +111,10 @@ export function SiteFooter() {
     event.preventDefault();
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!validEmail) {
-      setStatus("请输入有效的邮箱地址");
+      setStatus("Please enter a valid email address.");
       return;
     }
-    setStatus("已记录演示订阅，本案例不会发送数据");
+    setStatus("Demo signup recorded locally. No data was sent.");
     setEmail("");
   };
 
@@ -122,11 +122,11 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="shell footer-lead">
         <div>
-          <span className="eyebrow eyebrow-light">每周一封表达练习</span>
-          <h2>把一次好表达，练成稳定能力。</h2>
+          <span className="eyebrow eyebrow-light">One speaking drill every week</span>
+          <h2>Turn one strong presentation into a repeatable skill.</h2>
         </div>
         <form className="newsletter-form" onSubmit={submitNewsletter} noValidate>
-          <label htmlFor="newsletter-email">邮箱地址</label>
+          <label htmlFor="newsletter-email">Email address</label>
           <div>
             <input
               id="newsletter-email"
@@ -138,40 +138,40 @@ export function SiteFooter() {
               required
             />
             <button className="button button-amber" type="submit">
-              获取练习
+              Get the Drill
             </button>
           </div>
           <p id="newsletter-status" className="form-status" aria-live="polite">
-            {status || "仅作前端交互演示，不会发送邮件。"}
+            {status || "Front-end demo only. No email will be sent."}
           </p>
         </form>
       </div>
       <div className="shell footer-grid">
         <div className="footer-brand-block">
           <Brand />
-          <p>用结构、声音和现场感，让每一次表达都更有方向。</p>
+          <p>Build structure, voice, and presence so every message has direction.</p>
         </div>
         <div>
-          <h3>探索</h3>
-          <Link href="/courses">训练课程</Link>
-          <Link href="/insights">表达洞察</Link>
-          <Link href="/contact">预约咨询</Link>
+          <h3>Explore</h3>
+          <Link href="/courses">Training Courses</Link>
+          <Link href="/insights">Speaking Insights</Link>
+          <Link href="/contact">Book a Consultation</Link>
         </div>
         <div>
-          <h3>案例说明</h3>
-          <span>虚构品牌与内容</span>
-          <span>无真实支付功能</span>
-          <span>无数据外传</span>
+          <h3>Demo Notes</h3>
+          <span>Fictional brand and content</span>
+          <span>No real payment features</span>
+          <span>No external data transfer</span>
         </div>
         <div>
-          <h3>联系</h3>
+          <h3>Contact</h3>
           <a href="mailto:hello@voxfield.example">hello@voxfield.example</a>
-          <span>周一至周五 09:30—18:00</span>
+          <span>Monday to Friday, 9:30–18:00</span>
         </div>
       </div>
       <div className="shell footer-bottom">
-        <span>© 2026 声场 VOXFIELD</span>
-        <span>原创案例学习网站</span>
+        <span>© 2026 VOXFIELD</span>
+        <span>Original case-study website</span>
       </div>
     </footer>
   );

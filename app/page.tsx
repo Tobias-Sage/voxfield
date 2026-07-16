@@ -4,58 +4,58 @@ import { FaqList, InsightGrid, PricingSection } from "./components/Interactive";
 import { testimonials } from "./data";
 
 export const metadata: Metadata = {
-  title: "首页",
+  title: "Home",
   description:
-    "声场 VOXFIELD 中文演讲训练平台，覆盖表达结构、声音呈现、现场影响与商业场景。",
+    "VOXFIELD is an English-language speaking academy for structure, vocal control, presence, and business communication.",
 };
 
 const capabilities = [
   {
     number: "01",
-    title: "结构先行",
-    description: "把复杂内容压缩成听众能跟随、能记住、能行动的表达路径。",
-    detail: "主张 / 证据 / 行动",
+    title: "Lead With Structure",
+    description: "Turn complex material into a path your audience can follow, remember, and act on.",
+    detail: "Claim / Evidence / Action",
   },
   {
     number: "02",
-    title: "声音有层次",
-    description: "用气息、重音和停顿稳定节奏，让关键信息自然浮现。",
-    detail: "气息 / 重音 / 停顿",
+    title: "Use a Dynamic Voice",
+    description: "Control breath, emphasis, and silence so the important ideas rise naturally.",
+    detail: "Breath / Emphasis / Pause",
   },
   {
     number: "03",
-    title: "现场有方向",
-    description: "让视线、手势和空间移动服务于观点，而不是制造干扰。",
-    detail: "视线 / 手势 / 空间",
+    title: "Direct the Room",
+    description: "Make eye contact, gestures, and movement support the point instead of distracting from it.",
+    detail: "Eye Line / Gesture / Space",
   },
   {
     number: "04",
-    title: "回应有边界",
-    description: "识别问题意图，在追问、质疑与不同意见中保持清晰可信。",
-    detail: "确认 / 回应 / 推进",
+    title: "Respond With Boundaries",
+    description: "Read the intent behind a question and stay clear through challenge and disagreement.",
+    detail: "Confirm / Respond / Advance",
   },
 ];
 
 const learningSteps = [
   {
-    step: "定位",
-    title: "先判断你为什么要说",
-    copy: "明确听众、场景和希望推动的下一步，避免一开始就掉进内容细节。",
+    step: "Focus",
+    title: "Know why you need to speak",
+    copy: "Define the audience, situation, and next step before you get lost in content details.",
   },
   {
-    step: "构建",
-    title: "把想法组织成路径",
-    copy: "从结论、理由到证据，建立一条听众不需要猜测的逻辑线。",
+    step: "Build",
+    title: "Organize ideas into a path",
+    copy: "Move from conclusion to reasons and evidence along a line the audience never has to guess.",
   },
   {
-    step: "呈现",
-    title: "让声音和身体支持观点",
-    copy: "通过短时练习调整节奏、视线与动作，形成稳定的表达状态。",
+    step: "Deliver",
+    title: "Let voice and body support the point",
+    copy: "Use short drills to refine pace, eye line, and movement until your delivery feels stable.",
   },
   {
-    step: "复盘",
-    title: "把一次经验沉淀成能力",
-    copy: "用明确指标复盘内容与现场反馈，持续升级下一次表达。",
+    step: "Review",
+    title: "Turn one experience into lasting skill",
+    copy: "Review content and audience response against clear markers, then upgrade the next attempt.",
   },
 ];
 
@@ -70,36 +70,36 @@ export default function Home() {
         <div className="shell hero-content">
           <div className="hero-copy">
             <p className="hero-kicker">
-              <span /> 中文表达训练平台
+              <span /> SPEAKING SKILLS FOR REAL-WORLD MOMENTS
             </p>
             <h1>
-              让每一次表达，
-              <em>都有清晰的力量。</em>
+              Make every word land
+              <em>with clarity.</em>
             </h1>
             <p className="hero-intro">
-              不堆砌话术，从结构、声音与现场感开始，把“偶尔讲得好”练成稳定能力。
+              Move beyond scripts. Build structure, voice, and presence until strong communication becomes repeatable.
             </p>
             <div className="hero-actions">
               <Link className="button button-amber" href="/courses">
-                查看训练路径 <span aria-hidden="true">↗</span>
+                Explore the Path <span aria-hidden="true">↗</span>
               </Link>
               <Link className="button button-ghost-light" href="/contact">
-                预约公开课
+                Book a Class
               </Link>
             </div>
           </div>
           <div className="hero-proof">
             <div>
               <strong>4</strong>
-              <span>核心能力维度</span>
+              <span>Core skill areas</span>
             </div>
             <div>
               <strong>10<span>min</span></strong>
-              <span>单次刻意练习</span>
+              <span>Focused practice</span>
             </div>
             <div>
               <strong>28</strong>
-              <span>场景训练任务</span>
+              <span>Scenario drills</span>
             </div>
           </div>
         </div>
@@ -109,10 +109,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="statement-strip" aria-label="品牌主张">
+      <section className="statement-strip" aria-label="Brand statement">
         <div className="shell statement-inner">
           <span>VOXFIELD METHOD</span>
-          <p>真正有影响力的表达，不是说得更多，而是让重要的事被听懂。</p>
+          <p>Influential speaking is not about saying more. It is about making what matters understood.</p>
           <i aria-hidden="true">↘</i>
         </div>
       </section>
@@ -121,11 +121,11 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading section-heading-split">
             <div>
-              <span className="eyebrow">核心训练</span>
-              <h2 id="capabilities-title">四个维度，搭起稳定表达系统。</h2>
+              <span className="eyebrow">Core Training</span>
+              <h2 id="capabilities-title">Four dimensions. One reliable speaking system.</h2>
             </div>
             <p>
-              从内容到现场，每个模块都对应一个可观察、可练习、可复盘的能力目标。
+              From content to delivery, every module targets a skill you can observe, practice, and review.
             </p>
           </div>
           <div className="capability-grid">
@@ -148,13 +148,13 @@ export default function Home() {
       <section className="section method-section" aria-labelledby="method-title">
         <div className="shell method-grid">
           <div className="method-intro">
-            <span className="eyebrow eyebrow-light">VOXFIELD 训练法</span>
-            <h2 id="method-title">不是背一套技巧，而是建立一条自己的表达路径。</h2>
+            <span className="eyebrow eyebrow-light">The VOXFIELD Method</span>
+            <h2 id="method-title">Do not memorize tricks. Build a speaking process that is your own.</h2>
             <p>
-              每个训练单元都从真实工作场景出发，完成一次“理解—练习—反馈—复盘”的短循环。
+              Every training unit starts with a real work scenario and moves through a short cycle of understand, practice, feedback, and review.
             </p>
             <Link className="text-link light-link" href="/courses">
-              查看完整课程 <span aria-hidden="true">↗</span>
+              View All Courses <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <ol className="method-list">
@@ -175,31 +175,31 @@ export default function Home() {
       <section className="section scenario-section" aria-labelledby="scenario-title">
         <div className="shell">
           <div className="section-heading centered">
-            <span className="eyebrow">真实场景</span>
-            <h2 id="scenario-title">学的不是“演讲”，是下一次就要发生的表达。</h2>
+            <span className="eyebrow">Real Scenarios</span>
+            <h2 id="scenario-title">Train for the next conversation that actually matters.</h2>
           </div>
           <div className="scenario-grid">
             <article className="scenario-card large">
-              <div className="scenario-label">01 / 工作汇报</div>
+              <div className="scenario-label">01 / WORK UPDATE</div>
               <div>
-                <h3>先给判断，再讲过程。</h3>
-                <p>让上级快速抓住结论、风险和下一步，而不是在背景里寻找重点。</p>
+                <h3>Give the judgment before the journey.</h3>
+                <p>Help leaders find the conclusion, risk, and next step without digging through background.</p>
               </div>
               <span className="scenario-shape shape-one" aria-hidden="true" />
             </article>
             <article className="scenario-card blue">
-              <div className="scenario-label">02 / 商业提案</div>
+              <div className="scenario-label">02 / BUSINESS PITCH</div>
               <div>
-                <h3>让方案进入客户的决策路径。</h3>
-                <p>从问题、价值到行动，把信息组织成可讨论的决定。</p>
+                <h3>Enter the client's decision path.</h3>
+                <p>Move from problem to value to action, and make the proposal easier to discuss.</p>
               </div>
               <span className="scenario-shape shape-two" aria-hidden="true" />
             </article>
             <article className="scenario-card cream">
-              <div className="scenario-label">03 / 公开分享</div>
+              <div className="scenario-label">03 / PUBLIC TALK</div>
               <div>
-                <h3>在陌生目光前，仍然保持自己的节奏。</h3>
-                <p>用开场、停顿与视线建立真实连接。</p>
+                <h3>Keep your rhythm in front of unfamiliar faces.</h3>
+                <p>Use the opening, pauses, and eye contact to create a real connection.</p>
               </div>
               <span className="scenario-shape shape-three" aria-hidden="true" />
             </article>
@@ -213,10 +213,10 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading section-heading-split">
             <div>
-              <span className="eyebrow">练习之后</span>
-              <h2 id="voices-title">表达改变的，不只是一场发言。</h2>
+              <span className="eyebrow">After the Practice</span>
+              <h2 id="voices-title">Better speaking changes more than one presentation.</h2>
             </div>
-            <p>以下人物与反馈为案例网站的原创虚构内容，用于呈现产品体验。</p>
+            <p>These people and comments are original fictional content created for this case-study experience.</p>
           </div>
           <div className="testimonial-grid">
             {testimonials.map((item, index) => (
@@ -242,11 +242,11 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading section-heading-split">
             <div>
-              <span className="eyebrow">表达洞察</span>
-              <h2 id="insights-title">把方法带进每一次开口之前。</h2>
+              <span className="eyebrow">Speaking Insights</span>
+              <h2 id="insights-title">Bring the method into every moment before you speak.</h2>
             </div>
             <Link className="text-link" href="/insights">
-              查看全部文章 <span aria-hidden="true">↗</span>
+              View All Articles <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <InsightGrid limit={3} />
@@ -256,11 +256,11 @@ export default function Home() {
       <section className="section faq-section" aria-labelledby="faq-title">
         <div className="shell faq-grid">
           <div className="faq-intro">
-            <span className="eyebrow">常见问题</span>
-            <h2 id="faq-title">开始之前，你可能想知道。</h2>
-            <p>没有找到你的问题？可以通过联系页提交学习目标。</p>
+            <span className="eyebrow">Frequently Asked Questions</span>
+            <h2 id="faq-title">A few things to know before you begin.</h2>
+            <p>Still have a question? Share your learning goal on the contact page.</p>
             <Link className="button button-outline-dark" href="/contact">
-              联系我们
+              Contact Us
             </Link>
           </div>
           <FaqList />
@@ -274,11 +274,11 @@ export default function Home() {
             <i />
           </div>
           <div>
-            <span className="eyebrow eyebrow-light">下一次表达，从现在开始</span>
-            <h2>你不需要成为另一个人，<br />只需要更清晰地成为自己。</h2>
+            <span className="eyebrow eyebrow-light">Your next message starts now</span>
+            <h2>You do not need to become someone else.<br />You need to become a clearer version of yourself.</h2>
           </div>
           <Link className="button button-amber" href="/contact">
-            预约一次公开课 <span aria-hidden="true">↗</span>
+            Book a Class <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>

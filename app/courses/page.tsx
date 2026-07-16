@@ -3,28 +3,29 @@ import Link from "next/link";
 import { CourseExplorer } from "../components/Interactive";
 
 export const metadata: Metadata = {
-  title: "训练课程",
-  description: "按表达结构、声音呈现、现场影响与商业场景探索声场 VOXFIELD 训练课程。",
+  title: "Training Courses",
+  description:
+    "Explore VOXFIELD courses in message structure, vocal delivery, stage presence, and business communication.",
 };
 
 const tracks = [
   {
     code: "A",
-    title: "清晰表达起步",
-    duration: "2—3 周",
-    copy: "从三分钟发言开始，建立结论先行、重点明确的基本结构。",
+    title: "Start With Clarity",
+    duration: "2–3 weeks",
+    copy: "Begin with a three-minute message and build the habit of leading with a clear conclusion.",
   },
   {
     code: "B",
-    title: "声音与现场进阶",
-    duration: "3—4 周",
-    copy: "稳定气息、节奏与动作，在多人场景中保持自然存在感。",
+    title: "Voice and Presence",
+    duration: "3–4 weeks",
+    copy: "Stabilize breath, pace, and movement so you can stay natural in front of a group.",
   },
   {
     code: "C",
-    title: "商业场景实战",
-    duration: "4—6 周",
-    copy: "把表达能力带进提案、汇报、问答与重要会议。",
+    title: "Business Communication",
+    duration: "4–6 weeks",
+    copy: "Apply your speaking system to pitches, updates, Q&A sessions, and important meetings.",
   },
 ];
 
@@ -34,15 +35,15 @@ export default function CoursesPage() {
       <section className="page-hero courses-hero">
         <div className="shell page-hero-grid">
           <div>
-            <span className="eyebrow eyebrow-light">COURSE LIBRARY / 课程库</span>
-            <h1>把抽象的“会说话”，拆成每天能练的动作。</h1>
+            <span className="eyebrow eyebrow-light">COURSE LIBRARY</span>
+            <h1>Turn “speak with confidence” into actions you can practice every day.</h1>
           </div>
           <div className="page-hero-side">
             <p>
-              每门课程围绕一个明确成果设计。少量方法、真实场景、可以完成的短练习。
+              Each course is designed around one clear outcome: practical methods, realistic scenarios, and focused exercises you can finish.
             </p>
             <Link className="button button-amber" href="/contact">
-              获取学习建议 <span aria-hidden="true">↗</span>
+              Get a Learning Recommendation <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </div>
@@ -57,10 +58,10 @@ export default function CoursesPage() {
         <div className="shell">
           <div className="section-heading section-heading-split">
             <div>
-              <span className="eyebrow">建议路径</span>
-              <h2 id="tracks-title">从当前场景出发，不必从头学起。</h2>
+              <span className="eyebrow">Suggested Paths</span>
+              <h2 id="tracks-title">Start with your current challenge, not chapter one.</h2>
             </div>
-            <p>你可以按顺序完成，也可以直接进入最接近当前任务的课程。</p>
+            <p>Follow a complete path or jump directly into the course closest to your next task.</p>
           </div>
           <div className="track-grid">
             {tracks.map((track) => (
@@ -78,8 +79,8 @@ export default function CoursesPage() {
       <section className="section course-library" aria-labelledby="library-title">
         <div className="shell">
           <div className="section-heading">
-            <span className="eyebrow">全部课程</span>
-            <h2 id="library-title">选择你最想改变的表达环节。</h2>
+            <span className="eyebrow">All Courses</span>
+            <h2 id="library-title">Choose the part of your communication you want to change.</h2>
           </div>
           <CourseExplorer />
         </div>
@@ -88,11 +89,11 @@ export default function CoursesPage() {
       <section className="mini-cta">
         <div className="shell mini-cta-inner">
           <div>
-            <span>还不确定从哪里开始？</span>
-            <h2>告诉我们你的下一次重要表达。</h2>
+            <span>Not sure where to begin?</span>
+            <h2>Tell us about your next important speaking moment.</h2>
           </div>
           <Link className="button button-dark" href="/contact">
-            提交学习目标
+            Share Your Goal
           </Link>
         </div>
       </section>

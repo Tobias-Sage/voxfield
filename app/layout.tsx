@@ -17,32 +17,32 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: "声场 VOXFIELD｜让表达成为你的影响力",
-      template: "%s｜声场 VOXFIELD",
+      default: "VOXFIELD | Speak with Clarity and Impact",
+      template: "%s | VOXFIELD",
     },
     description:
-      "面向职场表达、公开演讲与商业路演的中文训练平台，用结构、声音与现场感，让每一次表达更清晰、更有力量。",
-    keywords: ["演讲训练", "职场表达", "公开演讲", "商业路演", "沟通课程"],
+      "A practical speaking academy for workplace communication, public presentations, and business pitches.",
+    keywords: ["public speaking training", "workplace communication", "presentation skills", "business pitching"],
     openGraph: {
       type: "website",
-      locale: "zh_CN",
+      locale: "en_US",
       url: baseUrl,
-      siteName: "声场 VOXFIELD",
-      title: "让每一次表达，都有清晰的力量",
-      description: "结构化表达、声音控制与现场影响力训练。",
+      siteName: "VOXFIELD",
+      title: "Make Every Word Land With Clarity",
+      description: "Training in message structure, vocal control, and confident presence.",
       images: [
         {
           url: baseUrl + "/og.png",
-          width: 1659,
+          width: 1660,
           height: 948,
-          alt: "声场 VOXFIELD 演讲训练平台",
+          alt: "VOXFIELD speaking academy",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "声场 VOXFIELD",
-      description: "让每一次表达，都有清晰的力量。",
+      title: "VOXFIELD",
+      description: "Make every word land with clarity.",
       images: [baseUrl + "/og.png"],
     },
   };
@@ -54,10 +54,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body>
         <a className="skip-link" href="#main-content">
-          跳到主要内容
+          Skip to main content
         </a>
         <SiteHeader />
         {children}

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ContactForm } from "../components/Interactive";
 
 export const metadata: Metadata = {
-  title: "联系我们",
-  description: "提交你的演讲、汇报或商业表达目标，体验声场 VOXFIELD 本地咨询表单。",
+  title: "Contact",
+  description:
+    "Share your presentation, pitch, or workplace communication goal with VOXFIELD through a local demonstration form.",
 };
 
 export default function ContactPage() {
@@ -13,30 +14,30 @@ export default function ContactPage() {
       <section className="contact-hero">
         <div className="shell contact-hero-grid">
           <div className="contact-copy">
-            <span className="eyebrow eyebrow-light">TALK TO US / 联系</span>
-            <h1>告诉我们，下一次你想把什么讲清楚。</h1>
+            <span className="eyebrow eyebrow-light">TALK TO US</span>
+            <h1>What do you want to make clearer the next time you speak?</h1>
             <p>
-              可以是一场汇报、一次提案、一次公开分享，或只是希望自己不再一开口就紧张。
+              It might be a work update, a pitch, a public presentation, or simply the wish to feel less nervous when you begin.
             </p>
             <div className="contact-points">
               <div>
                 <span>01</span>
-                <p>描述你即将面对的场景</p>
+                <p>Describe the situation you are preparing for</p>
               </div>
               <div>
                 <span>02</span>
-                <p>选择最想改善的能力</p>
+                <p>Choose the skill you most want to improve</p>
               </div>
               <div>
                 <span>03</span>
-                <p>完成一次本地演示提交</p>
+                <p>Complete a safe local demo submission</p>
               </div>
             </div>
           </div>
           <div className="contact-form-panel">
             <div className="form-panel-heading">
-              <span>学习目标问卷</span>
-              <small>约 2 分钟</small>
+              <span>Learning Goal Questionnaire</span>
+              <small>About 2 minutes</small>
             </div>
             <ContactForm />
           </div>
@@ -47,29 +48,29 @@ export default function ContactPage() {
         <div className="shell">
           <div className="section-heading section-heading-split">
             <div>
-              <span className="eyebrow">其他方式</span>
-              <h2 id="contact-info-title">先浏览，也可以。</h2>
+              <span className="eyebrow">Other Ways to Explore</span>
+              <h2 id="contact-info-title">Browsing first is fine, too.</h2>
             </div>
-            <p>所有联系信息均为案例网站的演示内容。</p>
+            <p>All contact information shown here is fictional case-study content.</p>
           </div>
           <div className="contact-info-grid">
             <article>
-              <span>课程与路径</span>
-              <h3>从当前场景找到一门课</h3>
-              <p>按表达结构、声音、现场或商业场景筛选课程。</p>
-              <Link href="/courses">浏览课程 ↗</Link>
+              <span>Courses and Paths</span>
+              <h3>Find one course for your current situation</h3>
+              <p>Filter by structure, voice, presence, or a specific business scenario.</p>
+              <Link href="/courses">Browse Courses ↗</Link>
             </article>
             <article>
-              <span>电子邮箱</span>
+              <span>Email</span>
               <h3>hello@voxfield.example</h3>
-              <p>示例邮箱地址，不接收真实邮件。</p>
-              <a href="mailto:hello@voxfield.example">打开邮件应用 ↗</a>
+              <p>This is a sample address and does not receive real messages.</p>
+              <a href="mailto:hello@voxfield.example">Open Email App ↗</a>
             </article>
             <article>
-              <span>工作时间</span>
-              <h3>周一至周五</h3>
-              <p>09:30—18:00，案例中不提供真实客服。</p>
-              <Link href="/insights">阅读表达笔记 ↗</Link>
+              <span>Hours</span>
+              <h3>Monday to Friday</h3>
+              <p>9:30–18:00. This demo does not provide real customer support.</p>
+              <Link href="/insights">Read Speaking Notes ↗</Link>
             </article>
           </div>
         </div>
