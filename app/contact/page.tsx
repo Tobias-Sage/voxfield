@@ -63,13 +63,13 @@ export default function ContactPage() {
             <article>
               <span>Email</span>
               <h3>support@voxfield.top</h3>
-              <p>This is a sample address and does not receive real messages.</p>
+              <p>Reach us here.</p>
               <a href="mailto:support@voxfield.top">Open Email App ↗</a>
             </article>
             <article>
               <span>Hours</span>
               <h3>Monday to Friday</h3>
-              <p>9:30–18:00. This demo does not provide real customer support.</p>
+              <p>9:30–18:00.</p>
               <Link href="/insights">Read Speaking Notes ↗</Link>
             </article>
           </div>
