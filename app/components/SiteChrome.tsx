@@ -158,10 +158,10 @@ export function SiteFooter() {
           <Link href="/contact">Book a Consultation</Link>
         </div>
         <div>
-          <h3>Demo Notes</h3>
-          <span>Fictional brand and content</span>
-          <span>No real payment features</span>
-          <span>No external data transfer</span>
+          <h3>Legal</h3>
+          <Link href="/terms">Terms &amp; Conditions</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <span>Fictional case-study service</span>
         </div>
         <div>
           <h3>Contact</h3>

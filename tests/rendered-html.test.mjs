@@ -43,6 +43,8 @@ test("server-renders every public route in English", async () => {
     ["/courses", "Turn “speak with confidence”"],
     ["/insights", "Good communication often begins"],
     ["/contact", "What do you want to make clearer"],
+    ["/terms", "Terms &amp; Conditions"],
+    ["/privacy", "Privacy Policy"],
   ]);
 
   for (const [path, headline] of expectations) {
@@ -65,6 +67,8 @@ test("English content, local interactions, and social image are present", async 
     "app/courses/page.tsx",
     "app/insights/page.tsx",
     "app/contact/page.tsx",
+    "app/terms/page.tsx",
+    "app/privacy/page.tsx",
   ];
   const sources = await Promise.all(
     sourceFiles.map((file) => readFile(new URL(file, projectRoot), "utf8")),
@@ -77,6 +81,8 @@ test("English content, local interactions, and social image are present", async 
   assert.match(source, /Filter by course category/);
   assert.match(source, /Please enter a valid email address/);
   assert.match(source, /Local demo submitted successfully/);
+  assert.match(source, /href="\/terms"/);
+  assert.match(source, /href="\/privacy"/);
   await access(new URL("public/og.png", projectRoot));
   await access(new URL("public/images/hero-speaker.png", projectRoot));
 });
