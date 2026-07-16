@@ -29,17 +29,14 @@ export function Brand() {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [openPath, setOpenPath] = useState<string | null>(null);
   const [notice, setNotice] = useState("");
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  const menuOpen = openPath === pathname;
 
   useEffect(() => {
     if (!menuOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") setOpenPath(null);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
@@ -89,7 +86,11 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() =>
+              setOpenPath((currentPath) =>
+                currentPath === pathname ? null : pathname,
+              )
+            }
           >
             <span />
             <span />

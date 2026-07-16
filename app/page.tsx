@@ -190,7 +190,7 @@ export default function Home() {
             <article className="scenario-card blue">
               <div className="scenario-label">02 / BUSINESS PITCH</div>
               <div>
-                <h3>Enter the client's decision path.</h3>
+                <h3>Enter the client&apos;s decision path.</h3>
                 <p>Move from problem to value to action, and make the proposal easier to discuss.</p>
               </div>
               <span className="scenario-shape shape-two" aria-hidden="true" />

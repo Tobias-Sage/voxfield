@@ -4,26 +4,23 @@ import test from "node:test";
 
 const projectRoot = new URL("../", import.meta.url);
 
-async function getWorker() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-  return worker;
+async function getVercelHandler() {
+  const handlerUrl = new URL(
+    "../.vercel/output/functions/__server.func/index.mjs",
+    import.meta.url,
+  );
+  handlerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  const { default: handler } = await import(handlerUrl.href);
+  return handler;
 }
 
-async function render(worker, path) {
-  return worker.fetch(
+async function render(handler, path) {
+  return handler.fetch(
     new Request(`http://localhost${path}`, {
       headers: { accept: "text/html" },
     }),
     {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
       waitUntil() {},
-      passThroughOnException() {},
     },
   );
 }
@@ -37,7 +34,7 @@ function visibleText(html) {
 }
 
 test("server-renders every public route in English", async () => {
-  const worker = await getWorker();
+  const handler = await getVercelHandler();
   const expectations = new Map([
     ["/", "Make every word land"],
     ["/courses", "Turn “speak with confidence”"],
@@ -48,7 +45,7 @@ test("server-renders every public route in English", async () => {
   ]);
 
   for (const [path, headline] of expectations) {
-    const response = await render(worker, path);
+    const response = await render(handler, path);
     assert.equal(response.status, 200, path);
     assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
     const text = visibleText(await response.text());
@@ -85,4 +82,9 @@ test("English content, local interactions, and social image are present", async 
   assert.match(source, /href="\/privacy"/);
   await access(new URL("public/og.png", projectRoot));
   await access(new URL("public/images/hero-speaker.png", projectRoot));
+  await access(new URL(".vercel/output/config.json", projectRoot));
+  await access(new URL(".vercel/output/static/og.png", projectRoot));
+  await access(
+    new URL(".vercel/output/static/images/hero-speaker.png", projectRoot),
+  );
 });
