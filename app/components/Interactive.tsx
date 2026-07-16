@@ -82,9 +82,7 @@ export function PricingSection() {
             );
           })}
         </div>
-        <p className="demo-disclaimer">
-          Prices and benefits are for demonstration only. No payment is processed.
-        </p>
+        
       </div>
     </section>
   );
