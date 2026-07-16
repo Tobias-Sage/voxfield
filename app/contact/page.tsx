@@ -62,9 +62,9 @@ export default function ContactPage() {
             </article>
             <article>
               <span>Email</span>
-              <h3>hello@voxfield.example</h3>
+              <h3>support@voxfield.top</h3>
               <p>This is a sample address and does not receive real messages.</p>
-              <a href="mailto:hello@voxfield.example">Open Email App ↗</a>
+              <a href="mailto:support@voxfield.top">Open Email App ↗</a>
             </article>
             <article>
               <span>Hours</span>
