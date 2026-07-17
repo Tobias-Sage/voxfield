@@ -2697,3 +2697,29 @@ img {
 .auth-switch a:hover {
   text-decoration: underline;
 }
+/* ===== Navbar Auth Buttons ===== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.nav-actions .nav-auth {
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  padding: 0.3rem 0.6rem;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.nav-actions .nav-auth:hover {
+  color: #b8860b;
+}
+
+.nav-actions .nav-signup {
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
