@@ -17,10 +17,8 @@ export default function SignInPage() {
       return;
     }
     setLoading(true);
-    // 模拟登录过程
     setTimeout(() => {
       setLoading(false);
-      // 登录成功后跳转到首页
       router.push("/");
     }, 800);
   };
