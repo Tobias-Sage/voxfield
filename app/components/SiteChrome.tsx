@@ -6,6 +6,7 @@ import { FormEvent, useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/courses", label: "Courses" },
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" },
@@ -69,6 +70,10 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <div className="nav-actions">
+            <Link href="/signin" className="nav-link nav-auth">Sign In</Link>
+            <Link href="/signup" className="button button-small button-amber nav-signup">Sign Up</Link>
+          </div>
           <Link className="nav-login" href="/contact?topic=student-support">
             Student Support
           </Link>
