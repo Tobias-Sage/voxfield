@@ -21,7 +21,6 @@ export default function SignUpPage() {
     // 模拟注册过程
     setTimeout(() => {
       setLoading(false);
-      // 注册成功后跳转到首页的价格区域
       router.push("/#plans");
     }, 800);
   };
