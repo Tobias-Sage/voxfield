@@ -5,7 +5,7 @@ import { CourseExplorer } from "../components/Interactive";
 export const metadata: Metadata = {
   title: "Training Courses",
   description:
-    "Explore VOXFIELD courses in message structure, vocal delivery, stage presence, and business communication.",
+    "Explore Voxfield courses in message structure, vocal delivery, stage presence, and business communication.",
 };
 
 const tracks = [

@@ -45,7 +45,7 @@ export default function InsightsPage() {
             </p>
             <div className="article-meta">
               <span>7 min read</span>
-              <span>Case-study article</span>
+              <span>Communication strategy</span>
             </div>
             <Link className="button button-dark" href="#note-list-title">
               View the Method Summary
@@ -61,7 +61,7 @@ export default function InsightsPage() {
               <span className="eyebrow">All Notes</span>
               <h2 id="note-list-title">Start with one specific communication problem.</h2>
             </div>
-            <p>Article buttons are local demos and do not load or request external content.</p>
+            <p>Open any note for a focused method you can apply to your next conversation.</p>
           </div>
           <InsightGrid />
         </div>

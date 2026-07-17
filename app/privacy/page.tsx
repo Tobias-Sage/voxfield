@@ -4,18 +4,18 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy policy for the fictional VOXFIELD speaking-academy case-study website.",
+    "How Voxfield collects, uses, protects, and manages personal information.",
 };
 
 const sections = [
-  { id: "scope", label: "Scope" },
-  { id: "information-entered", label: "Information You Enter" },
-  { id: "technical-data", label: "Technical Data" },
-  { id: "cookies", label: "Cookies & Storage" },
-  { id: "accounts-payments", label: "Accounts & Payments" },
-  { id: "retention", label: "Retention" },
-  { id: "external-actions", label: "External Actions" },
+  { id: "information", label: "Information We Collect" },
+  { id: "use", label: "How We Use Information" },
+  { id: "cookies", label: "Cookies & Technology" },
+  { id: "providers", label: "Service Providers" },
+  { id: "retention", label: "Data Retention" },
+  { id: "security", label: "Security" },
   { id: "choices", label: "Your Choices" },
+  { id: "children", label: "Children’s Privacy" },
   { id: "changes-contact", label: "Changes & Contact" },
 ];
 
@@ -27,10 +27,10 @@ export default function PrivacyPage() {
           <span className="eyebrow eyebrow-light">PRIVACY / VOXFIELD</span>
           <h1>Privacy Policy</h1>
           <p>
-            This policy describes how information is handled when you explore this
-            fictional, front-end case-study website.
+            This policy explains how Voxfield handles personal information when you
+            explore our website, contact our team, or use our learning services.
           </p>
-          <span className="legal-updated">Last updated: July 16, 2026</span>
+          <span className="legal-updated">Last updated: July 17, 2026</span>
         </div>
       </section>
 
@@ -48,106 +48,107 @@ export default function PrivacyPage() {
 
           <article className="legal-document">
             <div className="legal-notice">
-              <strong>Privacy at a glance</strong>
+              <strong>Privacy with purpose</strong>
               <p>
-                VOXFIELD does not operate a customer database. The contact and
-                newsletter forms are local demonstrations and do not send the
-                information you type to VOXFIELD.
+                Voxfield uses personal information to provide learning services,
+                respond to questions, and improve the experience we offer.
               </p>
             </div>
 
-            <section id="scope">
+            <section id="information">
               <span>01</span>
-              <h2>Scope</h2>
+              <h2>Information We Collect</h2>
               <p>
-                This policy applies to the VOXFIELD case-study website and its
-                demonstration pages. It does not describe a real academy, membership
-                platform, instructor service, or customer relationship.
+                We may collect information you provide directly, including your name,
+                email address, learning goals, messages, course interests, membership
+                details, and communication preferences.
+              </p>
+              <p>
+                We may also receive standard technical information when you visit the
+                website, such as IP address, browser type, device information, viewed
+                pages, referring page, and request time.
               </p>
             </section>
 
-            <section id="information-entered">
+            <section id="use">
               <span>02</span>
-              <h2>Information You Enter</h2>
-              <p>
-                The contact form asks for a name, email address, learning goal, and
-                message. The newsletter field asks for an email address. These entries
-                are checked in your browser to display validation or success feedback.
-                The site does not intentionally transmit, save, email, or add them to
-                a marketing list.
-              </p>
-              <p>
-                Refreshing the page clears the demonstration form state. Please do not
-                enter sensitive personal, financial, health, or confidential business
-                information.
-              </p>
-            </section>
-
-            <section id="technical-data">
-              <span>03</span>
-              <h2>Technical Data</h2>
-              <p>
-                Like most hosted websites, the infrastructure used to deliver and
-                secure this site may process standard request information such as IP
-                address, browser type, device information, request time, and requested
-                page. VOXFIELD does not use this case study to build individual
-                profiles from that information.
-              </p>
+              <h2>How We Use Information</h2>
+              <p>We use information to:</p>
+              <ul>
+                <li>respond to enquiries and recommend suitable learning paths;</li>
+                <li>manage course access, membership, and customer support;</li>
+                <li>send requested drills, updates, and service communications;</li>
+                <li>maintain, secure, and improve the website and learning experience;</li>
+                <li>meet legal, accounting, and operational requirements.</li>
+              </ul>
             </section>
 
             <section id="cookies">
-              <span>04</span>
-              <h2>Cookies &amp; Browser Storage</h2>
+              <span>03</span>
+              <h2>Cookies &amp; Similar Technology</h2>
               <p>
-                The VOXFIELD interface does not intentionally set advertising,
-                analytics, or preference cookies and does not use browser storage for
-                form submissions. The hosting or access-control service may use
-                technically necessary mechanisms to deliver the site securely and
-                confirm authorized access.
+                Voxfield and its service providers may use cookies or similar
+                technologies that are necessary for security, preferences, performance,
+                and access to learning services. You can manage available cookie
+                controls through your browser settings.
               </p>
             </section>
 
-            <section id="accounts-payments">
-              <span>05</span>
-              <h2>Accounts &amp; Payments</h2>
+            <section id="providers">
+              <span>04</span>
+              <h2>Service Providers</h2>
               <p>
-                There is no VOXFIELD student account, authentication database, payment
-                processor, or subscription system. Login, plan, and purchase controls
-                are visual demonstrations only, so the site does not collect passwords
-                or payment-card details.
+                We may share information with trusted providers that support website
+                hosting, communications, analytics, customer service, payments, and
+                security. They may use information only to perform services for
+                Voxfield and must protect it appropriately.
+              </p>
+              <p>
+                We do not sell personal information or share it for unrelated
+                third-party marketing.
               </p>
             </section>
 
             <section id="retention">
-              <span>06</span>
-              <h2>Retention</h2>
+              <span>05</span>
+              <h2>Data Retention</h2>
               <p>
-                Because form entries are not submitted to VOXFIELD, VOXFIELD does not
-                retain them. Hosting providers may retain limited operational or
-                security logs according to their own policies and legitimate service
-                requirements.
+                We retain personal information only for as long as needed to provide
+                services, maintain records, resolve disputes, enforce agreements, and
+                meet legal obligations. Retention periods depend on the type of
+                information and why it was collected.
               </p>
             </section>
 
-            <section id="external-actions">
-              <span>07</span>
-              <h2>External Actions</h2>
+            <section id="security">
+              <span>06</span>
+              <h2>Security</h2>
               <p>
-                Most navigation stays within the site. Selecting the sample email
-                address may open your device’s email application. Anything you choose
-                to send through that application is handled by your email provider,
-                not by this website.
+                We use reasonable administrative, technical, and organizational
+                safeguards to protect information from unauthorized access, loss,
+                alteration, or disclosure. No online system can guarantee absolute
+                security, so please use care when sharing information online.
               </p>
             </section>
 
             <section id="choices">
-              <span>08</span>
+              <span>07</span>
               <h2>Your Choices</h2>
               <p>
-                You can use the main content without completing either form. You may
-                clear a field before submission, leave the page, or refresh it to
-                remove the current local form state. You can also manage browser and
-                device privacy settings directly.
+                You may ask to access, correct, or delete personal information, object
+                to certain uses, or withdraw communication preferences where applicable.
+                You can unsubscribe from marketing messages using the link provided or
+                by emailing support@voxfield.top.
+              </p>
+            </section>
+
+            <section id="children">
+              <span>08</span>
+              <h2>Children’s Privacy</h2>
+              <p>
+                Voxfield services are intended for adults and professional learners.
+                We do not knowingly collect personal information from children under
+                the age required for independent consent in their location.
               </p>
             </section>
 
@@ -155,14 +156,13 @@ export default function PrivacyPage() {
               <span>09</span>
               <h2>Changes &amp; Contact</h2>
               <p>
-                This policy may change as the case study evolves. The date above shows
-                the latest published version. Questions can be raised through the
-                demonstration contact page; the displayed sample email address is not
-                monitored.
+                We may update this policy as our services or privacy practices change.
+                The date above identifies the latest version. For privacy questions or
+                requests, email support@voxfield.top.
               </p>
-              <Link className="text-link" href="/contact">
-                Open Contact Page <span aria-hidden="true">↗</span>
-              </Link>
+              <a className="text-link" href="mailto:support@voxfield.top">
+                Email Voxfield Support <span aria-hidden="true">↗</span>
+              </a>
             </section>
 
             <div className="legal-related">

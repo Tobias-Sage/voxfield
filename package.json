@@ -1,40 +1,28 @@
 {
-  "name": "voxfield-speech-academy",
-  "version": "0.1.0",
+  "name": "voxfield",
+  "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.9.0",
   "engines": {
-    "node": ">=22.13.0"
+    "node": "22.x"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vite build",
-    "start": "vinext start",
-    "test": "NITRO_PRESET=vercel vite build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .output --ignore-pattern .vercel --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "drizzle-orm": "0.45.2",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
-    "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
-    "nitro": "^3.0.260610-beta",
-    "react-server-dom-webpack": "19.2.6",
-    "tailwindcss": "4.2.1",
-    "typescript": "5.9.3",
-    "vinext": "0.0.50",
-    "vite": "8.0.13"
-  },
-  "type": "module"
+    "typescript": "5.9.3"
+  }
 }

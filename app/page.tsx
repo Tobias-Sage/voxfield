@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqList, InsightGrid, PricingSection } from "./components/Interactive";
-import { testimonials } from "./data";
 
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "VOXFIELD is an English-language speaking academy for structure, vocal control, presence, and business communication.",
+    "Voxfield is an English-language speaking academy for structure, vocal control, presence, and business communication.",
 };
 
 const capabilities = [
@@ -148,7 +147,7 @@ export default function Home() {
       <section className="section method-section" aria-labelledby="method-title">
         <div className="shell method-grid">
           <div className="method-intro">
-            <span className="eyebrow eyebrow-light">The VOXFIELD Method</span>
+            <span className="eyebrow eyebrow-light">The Voxfield Method</span>
             <h2 id="method-title">Do not memorize tricks. Build a speaking process that is your own.</h2>
             <p>
               Every training unit starts with a real work scenario and moves through a short cycle of understand, practice, feedback, and review.
@@ -190,7 +189,7 @@ export default function Home() {
             <article className="scenario-card blue">
               <div className="scenario-label">02 / BUSINESS PITCH</div>
               <div>
-                <h3>Enter the client&apos;s decision path.</h3>
+                <h3>Enter the client's decision path.</h3>
                 <p>Move from problem to value to action, and make the proposal easier to discuss.</p>
               </div>
               <span className="scenario-shape shape-two" aria-hidden="true" />
@@ -208,35 +207,6 @@ export default function Home() {
       </section>
 
       <PricingSection />
-
-      <section className="section testimonial-section" aria-labelledby="voices-title">
-        <div className="shell">
-          <div className="section-heading section-heading-split">
-            <div>
-              <span className="eyebrow">After the Practice</span>
-              <h2 id="voices-title">Better speaking changes more than one presentation.</h2>
-            </div>
-            <p>These people and comments are original fictional content created for this case-study experience.</p>
-          </div>
-          <div className="testimonial-grid">
-            {testimonials.map((item, index) => (
-              <figure className="testimonial-card" key={item.name}>
-                <div className="quote-mark" aria-hidden="true">“</div>
-                <blockquote>{item.quote}</blockquote>
-                <figcaption>
-                  <span className={"avatar avatar-" + (index + 1)} aria-hidden="true">
-                    {item.name.slice(0, 1)}
-                  </span>
-                  <span>
-                    <strong>{item.name}</strong>
-                    <small>{item.role}</small>
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section insights-preview" aria-labelledby="insights-title">
         <div className="shell">

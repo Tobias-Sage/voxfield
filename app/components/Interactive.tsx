@@ -12,6 +12,8 @@ import {
   plans,
 } from "../data";
 
+const formatPrice = (price: number) => price.toFixed(2);
+
 export function PricingSection() {
   const [annual, setAnnual] = useState(false);
 
@@ -44,7 +46,7 @@ export function PricingSection() {
         </div>
         <div className="pricing-grid">
           {plans.map((plan) => {
-            const monthlyEquivalent = Math.round(plan.annual / 12);
+            const monthlyEquivalent = plan.annual / 12;
             return (
               <article
                 className={plan.featured ? "pricing-card featured" : "pricing-card"}
@@ -56,12 +58,12 @@ export function PricingSection() {
                 <p className="plan-description">{plan.description}</p>
                 <div className="plan-price" aria-live="polite">
                   <span>$</span>
-                  <strong>{annual ? monthlyEquivalent : plan.monthly}</strong>
+                  <strong>{formatPrice(annual ? monthlyEquivalent : plan.monthly)}</strong>
                   <small>/ month</small>
                 </div>
                 <p className="billing-note">
                   {annual
-                    ? "Billed annually at $" + plan.annual + ". Cancel renewal anytime."
+                    ? "Billed annually at $" + formatPrice(plan.annual) + ". Cancel renewal anytime."
                     : "Billed monthly. Cancel renewal anytime."}
                 </p>
                 <ul className="check-list">
@@ -82,7 +84,6 @@ export function PricingSection() {
             );
           })}
         </div>
-        
       </div>
     </section>
   );
@@ -237,13 +238,12 @@ export function InsightGrid({ limit }: { limit?: number }) {
               </div>
               <h3>{item.title}</h3>
               <p>{item.excerpt}</p>
-              <button
-                type="button"
-                className="text-link demo-article-link"
-                onClick={() => window.alert("Article detail is a local demo and is not connected to a CMS.")}
-              >
-                Read Summary <span aria-hidden="true">↗</span>
-              </button>
+              <details className="insight-summary">
+                <summary className="text-link">
+                  Read Summary <span aria-hidden="true">+</span>
+                </summary>
+                <p>{item.summary}</p>
+              </details>
             </div>
           </article>
         ))}
@@ -269,8 +269,6 @@ const initialFields: FormFields = {
 export function ContactForm() {
   const [fields, setFields] = useState<FormFields>(initialFields);
   const [errors, setErrors] = useState<Partial<Record<keyof FormFields, string>>>({});
-  const [consent, setConsent] = useState(false);
-  const [consentError, setConsentError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const updateField = (field: keyof FormFields, value: string) => {
@@ -290,16 +288,12 @@ export function ContactForm() {
     }
     if (!fields.goal) nextErrors.goal = "Please choose a learning goal.";
     if (fields.message.trim().length < 10) nextErrors.message = "Please enter at least 10 characters.";
-    if (!consent) setConsentError("Please confirm that you understand this is a local demo.");
-
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0 || !consent) {
+    if (Object.keys(nextErrors).length > 0) {
       setSubmitted(false);
       return;
     }
     setFields(initialFields);
-    setConsent(false);
-    setConsentError("");
     setSubmitted(true);
   };
 
@@ -363,29 +357,15 @@ export function ContactForm() {
         {errors.message ? (
           <span id="contact-message-error">{errors.message}</span>
         ) : (
-          <small id="message-hint">At least 10 characters. This page does not send real data.</small>
+          <small id="message-hint">Add a few details so we can recommend the right starting point.</small>
         )}
       </div>
-      <label className="consent-check">
-        <input
-          type="checkbox"
-          checked={consent}
-          onChange={(event) => {
-            setConsent(event.target.checked);
-            setConsentError("");
-          }}
-          aria-invalid={Boolean(consentError)}
-          aria-describedby={consentError ? "consent-error" : undefined}
-        />
-        <span>I understand this is a case-study demo and the form is validated only on this page.</span>
-      </label>
-      {consentError && <span className="consent-error" id="consent-error">{consentError}</span>}
       <button className="button button-dark button-wide" type="submit">
         Submit My Goal
       </button>
       <div className={submitted ? "success-message visible" : "success-message"} role="status">
-        <strong>Local demo submitted successfully</strong>
-        <span>No data was sent. You can continue browsing or fill out the form again.</span>
+        <strong>Thank you — we’ve received your learning goals.</strong>
+        <span>The Voxfield team will follow up at the email address you provided.</span>
       </div>
     </form>
   );

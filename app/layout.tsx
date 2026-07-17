@@ -17,8 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: "VOXFIELD | Speak with Clarity and Impact",
-      template: "%s | VOXFIELD",
+      default: "Voxfield | Speak with Clarity and Impact",
+      template: "%s | Voxfield",
     },
     description:
       "A practical speaking academy for workplace communication, public presentations, and business pitches.",
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_US",
       url: baseUrl,
-      siteName: "VOXFIELD",
+      siteName: "Voxfield",
       title: "Make Every Word Land With Clarity",
       description: "Training in message structure, vocal control, and confident presence.",
       images: [
@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "VOXFIELD",
+      title: "Voxfield",
       description: "Make every word land with clarity.",
       images: [baseUrl + "/og.png"],
     },

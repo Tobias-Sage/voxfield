@@ -29,78 +29,66 @@ export function Brand() {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [openPath, setOpenPath] = useState<string | null>(null);
-  const [notice, setNotice] = useState("");
-  const menuOpen = openPath === pathname;
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenPath(null);
+      if (event.key === "Escape") setMenuOpen(false);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
-  const showDemoNotice = () => {
-    setNotice("This case-study demo is not connected to a real student account.");
-    window.setTimeout(() => setNotice(""), 3200);
-  };
-
   return (
-    <>
-      <header className="site-header">
-        <div className="shell header-inner">
-          <Brand />
-          <nav
-            id="primary-navigation"
-            className={menuOpen ? "primary-nav is-open" : "primary-nav"}
-            aria-label="Primary navigation"
-          >
-            {navItems.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={active ? "nav-link active" : "nav-link"}
-                  aria-current={active ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <button className="nav-login" type="button" onClick={showDemoNotice}>
-              Student Login
-            </button>
-            <Link className="button button-small button-amber" href="/contact">
-              Book a Class
-            </Link>
-          </nav>
-          <button
-            className={menuOpen ? "menu-button is-open" : "menu-button"}
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="primary-navigation"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={() =>
-              setOpenPath((currentPath) =>
-                currentPath === pathname ? null : pathname,
-              )
-            }
-          >
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
-      <div className={notice ? "demo-toast is-visible" : "demo-toast"} role="status">
-        {notice}
+    <header className="site-header">
+      <div className="shell header-inner">
+        <Brand />
+        <nav
+          id="primary-navigation"
+          className={menuOpen ? "primary-nav is-open" : "primary-nav"}
+          aria-label="Primary navigation"
+        >
+          {navItems.map((item) => {
+            const active =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={active ? "nav-link active" : "nav-link"}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <Link className="nav-login" href="/contact?topic=student-support">
+            Student Support
+          </Link>
+          <Link className="button button-small button-amber" href="/contact">
+            Book a Class
+          </Link>
+        </nav>
+        <button
+          className={menuOpen ? "menu-button is-open" : "menu-button"}
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+        </button>
       </div>
-    </>
+    </header>
   );
 }
 
@@ -115,7 +103,7 @@ export function SiteFooter() {
       setStatus("Please enter a valid email address.");
       return;
     }
-    setStatus("Demo signup recorded locally. No data was sent.");
+    setStatus("Welcome to Voxfield — your first speaking drill is on the way.");
     setEmail("");
   };
 
@@ -134,7 +122,7 @@ export function SiteFooter() {
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="name@example.com"
+              placeholder="you@company.com"
               aria-describedby="newsletter-status"
               required
             />
@@ -143,7 +131,7 @@ export function SiteFooter() {
             </button>
           </div>
           <p id="newsletter-status" className="form-status" aria-live="polite">
-            {status || "Front-end demo only. No email will be sent."}
+            {status || "Weekly drills, practical frameworks, and course updates."}
           </p>
         </form>
       </div>
@@ -162,17 +150,17 @@ export function SiteFooter() {
           <h3>Legal</h3>
           <Link href="/terms">Terms &amp; Conditions</Link>
           <Link href="/privacy">Privacy Policy</Link>
-          <span>Fictional case-study service</span>
+          <a href="mailto:support@voxfield.top">support@voxfield.top</a>
         </div>
         <div>
           <h3>Contact</h3>
-          <a href="mailto:hello@voxfield.example">hello@voxfield.example</a>
+          <a href="mailto:support@voxfield.top">support@voxfield.top</a>
           <span>Monday to Friday, 9:30–18:00</span>
         </div>
       </div>
       <div className="shell footer-bottom">
-        <span>© 2026 VOXFIELD</span>
-        <span>Original case-study website</span>
+        <span>© 2026 Voxfield</span>
+        <span>All rights reserved.</span>
       </div>
     </footer>
   );

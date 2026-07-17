@@ -1,9 +1,0 @@
-.git
-.openai
-.output
-.vinext
-.wrangler
-dist
-node_modules
-outputs
-work

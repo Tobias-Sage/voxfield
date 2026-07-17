@@ -5,7 +5,7 @@ import { ContactForm } from "../components/Interactive";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Share your presentation, pitch, or workplace communication goal with VOXFIELD through a local demonstration form.",
+    "Share your presentation, pitch, or workplace communication goal with the Voxfield team.",
 };
 
 export default function ContactPage() {
@@ -30,7 +30,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <span>03</span>
-                <p>Complete a safe local demo submission</p>
+                <p>Receive a recommended starting point from our team</p>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function ContactPage() {
               <span className="eyebrow">Other Ways to Explore</span>
               <h2 id="contact-info-title">Browsing first is fine, too.</h2>
             </div>
-            <p>All contact information shown here is fictional case-study content.</p>
+            <p>Choose the channel that best matches what you need next.</p>
           </div>
           <div className="contact-info-grid">
             <article>
@@ -63,13 +63,13 @@ export default function ContactPage() {
             <article>
               <span>Email</span>
               <h3>support@voxfield.top</h3>
-              <p>Reach us here.</p>
+              <p>Contact our team about courses, membership, or your learning path.</p>
               <a href="mailto:support@voxfield.top">Open Email App ↗</a>
             </article>
             <article>
               <span>Hours</span>
               <h3>Monday to Friday</h3>
-              <p>9:30–18:00.</p>
+              <p>9:30–18:00. We aim to respond within one business day.</p>
               <Link href="/insights">Read Speaking Notes ↗</Link>
             </article>
           </div>

@@ -4,17 +4,17 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Terms and conditions for the fictional VOXFIELD speaking-academy case-study website.",
+    "Terms and conditions for Voxfield courses, memberships, and speaking-development services.",
 };
 
 const sections = [
-  { id: "about", label: "About This Site" },
-  { id: "demo-features", label: "Demo Features" },
-  { id: "acceptable-use", label: "Acceptable Use" },
+  { id: "acceptance", label: "Acceptance" },
+  { id: "services", label: "Services & Enrollment" },
+  { id: "billing", label: "Membership & Billing" },
+  { id: "cancellation", label: "Changes & Cancellation" },
   { id: "intellectual-property", label: "Intellectual Property" },
-  { id: "disclaimers", label: "Disclaimers" },
-  { id: "third-party-services", label: "Third-Party Services" },
-  { id: "changes", label: "Changes" },
+  { id: "acceptable-use", label: "Acceptable Use" },
+  { id: "disclaimers", label: "Disclaimers & Liability" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -26,10 +26,10 @@ export default function TermsPage() {
           <span className="eyebrow eyebrow-light">LEGAL / VOXFIELD</span>
           <h1>Terms &amp; Conditions</h1>
           <p>
-            These terms explain how this fictional case-study website may be used and
-            clarify which features are demonstrations only.
+            These terms set out the agreement between you and Voxfield when you use
+            our website, courses, resources, and membership services.
           </p>
-          <span className="legal-updated">Last updated: July 16, 2026</span>
+          <span className="legal-updated">Last updated: July 17, 2026</span>
         </div>
       </section>
 
@@ -47,107 +47,118 @@ export default function TermsPage() {
 
           <article className="legal-document">
             <div className="legal-notice">
-              <strong>Case-study notice</strong>
+              <strong>Built for steady progress</strong>
               <p>
-                VOXFIELD is a fictional brand created for design and development
-                practice. This website does not provide a real membership, coaching
-                service, payment system, or student account.
+                Voxfield provides structured speaking education, practical exercises,
+                and learning resources designed to strengthen communication skills.
               </p>
             </div>
 
-            <section id="about">
+            <section id="acceptance">
               <span>01</span>
-              <h2>About This Site</h2>
+              <h2>Acceptance of These Terms</h2>
               <p>
-                By accessing this website, you agree to use it as a demonstration
-                experience. References to courses, instructors, memberships, pricing,
-                testimonials, availability, and outcomes are fictional and do not form
-                an offer to sell services.
+                By accessing the website or enrolling in a Voxfield course or
+                membership, you agree to these Terms &amp; Conditions and our Privacy
+                Policy. If you do not agree, please do not use the services.
               </p>
             </section>
 
-            <section id="demo-features">
+            <section id="services">
               <span>02</span>
-              <h2>Demo Features</h2>
+              <h2>Services &amp; Enrollment</h2>
               <p>
-                Interactive controls are included to demonstrate a potential product
-                experience. In particular:
+                Voxfield offers self-paced lessons, guided exercises, live learning
+                sessions, downloadable resources, and related speaking-development
+                services. Course access, schedules, and included benefits are described
+                on the relevant course or membership page.
               </p>
-              <ul>
-                <li>Membership and pricing buttons do not initiate a purchase.</li>
-                <li>Student-login controls do not create or access an account.</li>
-                <li>Contact and newsletter forms validate entries locally in your browser.</li>
-                <li>No confirmation email, consultation, or course access will be provided.</li>
-              </ul>
+              <p>
+                You are responsible for providing accurate enrollment and contact
+                information and for keeping your contact details current.
+              </p>
             </section>
 
-            <section id="acceptable-use">
+            <section id="billing">
               <span>03</span>
-              <h2>Acceptable Use</h2>
+              <h2>Membership &amp; Billing</h2>
               <p>
-                You may browse and evaluate the site for lawful personal, educational,
-                or professional-review purposes. You may not attempt to disrupt the
-                service, bypass access controls, probe its infrastructure, introduce
-                malicious code, or misrepresent the fictional content as a real
-                commercial offering.
+                Membership prices and billing periods are shown before enrollment.
+                Monthly plans renew each month and annual plans renew each year unless
+                cancelled before the next billing date. Applicable taxes or currency
+                conversion charges may be added where required.
+              </p>
+              <p>
+                By selecting a paid plan, you authorize the applicable recurring
+                charge for the plan and billing cycle you choose.
+              </p>
+            </section>
+
+            <section id="cancellation">
+              <span>04</span>
+              <h2>Changes &amp; Cancellation</h2>
+              <p>
+                You may request a plan change or cancellation before the next renewal
+                date by contacting support@voxfield.top. Cancellation stops future
+                renewals and does not automatically refund charges already processed,
+                except where required by applicable law.
               </p>
             </section>
 
             <section id="intellectual-property">
-              <span>04</span>
+              <span>05</span>
               <h2>Intellectual Property</h2>
               <p>
-                The VOXFIELD name, visual system, original copy, generated imagery, and
-                interface design shown on this site were created for this case study.
-                Unless applicable law permits otherwise, do not republish or present
-                these materials as your own commercial service without permission.
+                Voxfield owns or licenses the website design, course materials,
+                frameworks, videos, written content, graphics, and brand elements.
+                Enrollment grants you a limited, personal, non-transferable right to
+                use those materials for your own learning.
+              </p>
+              <p>
+                You may not reproduce, resell, distribute, publish, record, or create
+                competing materials from Voxfield content without written permission.
+              </p>
+            </section>
+
+            <section id="acceptable-use">
+              <span>06</span>
+              <h2>Acceptable Use</h2>
+              <p>
+                You must use the website and services lawfully and respectfully. Do
+                not share account access, interfere with the service, bypass access
+                controls, upload harmful material, scrape protected content, or use
+                Voxfield resources to infringe another person’s rights.
               </p>
             </section>
 
             <section id="disclaimers">
-              <span>05</span>
-              <h2>Disclaimers</h2>
-              <p>
-                The site and its content are provided “as is” for demonstration
-                purposes. Speaking exercises and articles are general educational
-                examples, not professional, legal, medical, or financial advice. No
-                specific result is promised, and uninterrupted availability is not
-                guaranteed.
-              </p>
-            </section>
-
-            <section id="third-party-services">
-              <span>06</span>
-              <h2>Third-Party Services</h2>
-              <p>
-                The site may rely on hosting and security infrastructure supplied by
-                third parties. Your use of those underlying services may also be
-                subject to their applicable terms. The sample email link may open your
-                own email application, but the displayed address is not monitored.
-              </p>
-            </section>
-
-            <section id="changes">
               <span>07</span>
-              <h2>Changes to These Terms</h2>
+              <h2>Disclaimers &amp; Liability</h2>
               <p>
-                These terms may be revised when the demonstration changes. The date at
-                the top of this page identifies the latest published version. Continued
-                use after an update means you accept the revised terms.
+                Learning outcomes depend on individual practice, participation, and
+                circumstances, so Voxfield does not guarantee a particular speaking,
+                career, or commercial result. The services are provided with reasonable
+                care, but availability may occasionally be interrupted for maintenance
+                or factors beyond our control.
+              </p>
+              <p>
+                To the fullest extent permitted by law, Voxfield is not liable for
+                indirect, incidental, or consequential loss arising from use of the
+                services.
               </p>
             </section>
 
             <section id="contact">
               <span>08</span>
-              <h2>Contact</h2>
+              <h2>Changes &amp; Contact</h2>
               <p>
-                Questions about this case-study website can be raised through the
-                demonstration contact page. The sample email address is not a real
-                support channel.
+                We may update these terms as our services evolve. The date above shows
+                the latest version. For questions about these terms, membership, or
+                account support, email support@voxfield.top.
               </p>
-              <Link className="text-link" href="/contact">
-                Open Contact Page <span aria-hidden="true">↗</span>
-              </Link>
+              <a className="text-link" href="mailto:support@voxfield.top">
+                Email Voxfield Support <span aria-hidden="true">↗</span>
+              </a>
             </section>
 
             <div className="legal-related">

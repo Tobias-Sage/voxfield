@@ -16,6 +16,7 @@ export type Insight = {
   category: "Communication" | "Voice Training" | "Scenario Breakdown";
   title: string;
   excerpt: string;
+  summary: string;
   readTime: string;
   accent: "amber" | "blue" | "cream";
 };
@@ -119,6 +120,8 @@ export const insights: Insight[] = [
     category: "Communication",
     title: "Before You Open the Slides, Write These Three Sentences",
     excerpt: "A clear briefing is usually decided before the presentation software ever opens.",
+    summary:
+      "Write the decision, the reason it matters, and the next action before building a single slide. Those three sentences become a filter for every chart, story, and supporting detail that follows.",
     readTime: "6 min read",
     accent: "amber",
   },
@@ -127,6 +130,8 @@ export const insights: Insight[] = [
     category: "Voice Training",
     title: "A Pause Is Not a Mistake. It Is a Signal.",
     excerpt: "Place silence around your key point and the audience will find it more easily.",
+    summary:
+      "A purposeful pause gives listeners time to process an idea and tells them what deserves attention. Mark one beat before the key sentence and another after it, then let the silence do part of the work.",
     readTime: "5 min read",
     accent: "blue",
   },
@@ -135,6 +140,8 @@ export const insights: Insight[] = [
     category: "Scenario Breakdown",
     title: "What Should You Answer First in a Difficult Q&A?",
     excerpt: "Confirm the question, then choose the response boundary before you start defending the details.",
+    summary:
+      "Begin by naming the concern you heard, then answer the part you can resolve clearly. This keeps the exchange focused, prevents defensive overexplaining, and creates a credible path to the next question.",
     readTime: "8 min read",
     accent: "cream",
   },
@@ -143,6 +150,8 @@ export const insights: Insight[] = [
     category: "Communication",
     title: "A Three-Minute Talk Needs Only One Job at the Start",
     excerpt: "Do not explain every detail. Show the audience why this matters to them now.",
+    summary:
+      "Use the opening to establish relevance, not to deliver the full background. A clear audience problem and one focused promise create enough momentum for the rest of a short talk.",
     readTime: "4 min read",
     accent: "blue",
   },
@@ -151,6 +160,8 @@ export const insights: Insight[] = [
     category: "Voice Training",
     title: "When Nerves Shake Your Voice, Start With the Exhale",
     excerpt: "A longer exhale and steady sentence ending work better than simply getting louder.",
+    summary:
+      "Release the breath before your first sentence, slow the final five words, and finish the thought before inhaling again. The goal is not a bigger voice—it is a steadier one.",
     readTime: "7 min read",
     accent: "amber",
   },
@@ -159,6 +170,8 @@ export const insights: Insight[] = [
     category: "Scenario Breakdown",
     title: "A Failed Pitch Is Rarely Just a Weak Idea",
     excerpt: "Even a strong proposal feels distant when its order ignores the client's decision process.",
+    summary:
+      "Reorder the pitch around the client's questions: what is changing, why now, what the solution unlocks, and what decision comes next. Strong ideas become persuasive when the sequence matches how people evaluate them.",
     readTime: "9 min read",
     accent: "cream",
   },
@@ -168,8 +181,8 @@ export const plans: Plan[] = [
   {
     name: "Essential Speaker",
     eyebrow: "Start with clarity",
-    monthly: 12,
-    annual: 108,
+    monthly: 19.99,
+    annual: 191.9,
     description: "For professionals who want stronger briefings, presentations, and everyday communication.",
     features: [
       "All foundation and advanced video lessons",
@@ -181,8 +194,8 @@ export const plans: Plan[] = [
   {
     name: "Stage Influence",
     eyebrow: "Bring your skills into the room",
-    monthly: 29,
-    annual: 264,
+    monthly: 49.99,
+    annual: 479.9,
     description: "For managers, sales teams, trainers, and frequent public speakers.",
     featured: true,
     features: [
@@ -192,24 +205,6 @@ export const plans: Plan[] = [
       "Personal presentation review checklist",
       "Early access to new courses",
     ],
-  },
-];
-
-export const testimonials = [
-  {
-    quote: "I used to include every detail. Now I first ask: what decision does the audience need to make next?",
-    name: "Maya Chen",
-    role: "Brand Strategy Lead",
-  },
-  {
-    quote: "The voice work did not make me louder. It helped me finish a thought clearly, even when I felt nervous.",
-    name: "Ethan Zhou",
-    role: "Product Director",
-  },
-  {
-    quote: "After restructuring the pitch, the client discussed next steps in the room instead of asking for more background.",
-    name: "Grace Gao",
-    role: "Independent Consultant",
   },
 ];
 
@@ -225,13 +220,13 @@ export const faqs = [
       "Both. The training covers meeting contributions, work updates, business pitches, and public presentations.",
   },
   {
-    question: "Will the membership buttons charge me?",
+    question: "Can I change or cancel my plan later?",
     answer:
-      "No. This is a case-study website. Pricing, membership, and form submissions are local interface demos with no payment or account connection.",
+      "Yes. Contact support@voxfield.top before your next billing date and our team will help you change or cancel your plan.",
   },
   {
     question: "How do I know which course to start with?",
     answer:
-      "Filter the course library by your current scenario, or submit your goal through the contact page. The demo form will confirm your entry locally.",
+      "Filter the course library by your current scenario, or share your goal through the contact page and the Voxfield team will recommend a starting point.",
   },
 ];
