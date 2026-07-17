@@ -21,7 +21,7 @@ export default function SignUpPage() {
     // 模拟注册过程
     setTimeout(() => {
       setLoading(false);
-      router.push("/#plans");
+      router.push("/pricing");
     }, 800);
   };
 
