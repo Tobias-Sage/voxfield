@@ -19,7 +19,12 @@ export default function SignInPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      router.push("/");
+      const goToSignUp = window.confirm(
+        "This account does not exist yet. Would you like to create one?"
+      );
+      if (goToSignUp) {
+        router.push("/signup");
+      }
     }, 800);
   };
 
