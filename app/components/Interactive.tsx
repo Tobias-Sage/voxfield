@@ -76,7 +76,15 @@ export function PricingSection() {
                 </ul>
                 <Link
                   className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                  href={"/contact?plan=" + encodeURIComponent(plan.name)}
+                  href={
+                    annual
+                      ? plan.name === "Essential Speaker"
+                        ? "https://www.creem.io/payment/prod_5CyLbyMyEKvUeBjXZV6AUr"
+                        : "https://www.creem.io/payment/prod_5GgMyncEuw7ItSSOURXGnp"
+                      : plan.name === "Essential Speaker"
+                      ? "https://www.creem.io/payment/prod_qZXDRxB5xdCXq90n1ES1F"
+                      : "https://www.creem.io/payment/prod_JdHFlkny5uq4Xw9kFxRCS"
+                  }
                 >
                   Choose This Plan
                 </Link>
