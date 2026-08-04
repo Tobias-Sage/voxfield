@@ -78,6 +78,10 @@ export function PricingSection() {
                   className={plan.featured ? "button button-dark" : "button button-outline-dark"}
                   onClick={async () => {
                     try {
+                      // 获取 click_id 从 URL 参数
+                      const searchParams = new URLSearchParams(window.location.search);
+                      const clickId = searchParams.get('click_id') || '';
+                
                       const price = annual ? plan.annual : plan.monthly;
                       const response = await fetch("/api/payment/initiate", {
                         method: "POST",
@@ -88,6 +92,7 @@ export function PricingSection() {
                           amount: price,
                           currency: "USD",
                           userEmail: "",
+                          clickId: clickId,
                         }),
                       });
                 
