@@ -74,20 +74,38 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-                <Link
+                <button
                   className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                  href={
-                    annual
-                      ? plan.name === "Essential Speaker"
-                        ? "https://www.creem.io/payment/prod_5CyLbyMyEKvUeBjXZV6AUr"
-                        : "https://www.creem.io/payment/prod_5GgMyncEuw7ItSSOURXGnp"
-                      : plan.name === "Essential Speaker"
-                      ? "https://www.creem.io/payment/prod_qZXDRxB5xdCXq90n1ES1F"
-                      : "https://www.creem.io/payment/prod_JdHFlkny5uq4Xw9kFxRCS"
-                  }
+                  onClick={async () => {
+                    try {
+                      const price = annual ? plan.annual : plan.monthly;
+                      const response = await fetch("/api/payment/initiate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          planName: plan.name,
+                          isAnnual: annual,
+                          amount: price,
+                          currency: "USD",
+                          userEmail: "",
+                        }),
+                      });
+                
+                      const result = await response.json();
+                
+                      if (result.success && result.paymentUrl) {
+                        window.location.href = result.paymentUrl;
+                      } else {
+                        alert("Failed to initiate payment. Please try again.");
+                      }
+                    } catch (error) {
+                      console.error("Payment initiation error:", error);
+                      alert("Something went wrong. Please try again.");
+                    }
+                  }}
                 >
                   Choose This Plan
-                </Link>
+                </button>
               </article>
             );
           })}
