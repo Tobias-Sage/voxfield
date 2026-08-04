@@ -2,16 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
 export async function POST(request: NextRequest) {
-  // ========== 临时调试：打印所有请求头 ==========
-  console.log("=== All Headers ===");
-  const headersObj: Record<string, string> = {};
-  request.headers.forEach((value, key) => {
-    headersObj[key] = value;
-  });
-  console.log(JSON.stringify(headersObj, null, 2));
-  console.log("=== End Headers ===");
-  // ============================================
-
   try {
     const rawBody = await request.text();
 
@@ -69,11 +59,18 @@ export async function POST(request: NextRequest) {
       const postbackUrl = `http://newmobi.fuse-cloud.com/pb?tid=${clickId || "unknown"}&s1=${data.amount || 0}`;
       console.log(`📤 Sending postback: ${postbackUrl}`);
 
+      // 发送回传并记录响应内容
       fetch(postbackUrl, { method: "GET" })
-        .then((res) =>
-          console.log(`✅ Postback sent (status: ${res.status}) for click_id: ${clickId}`)
-        )
-        .catch((err) => console.error(`❌ Postback failed: ${err}`));
+        .then(async (res) => {
+          const responseText = await res.text();
+          console.log(`✅ Postback response status: ${res.status}`);
+          if (responseText) {
+            console.log(`📦 Postback response body: ${responseText}`);
+          } else {
+            console.log(`📦 Postback response body: (empty)`);
+          }
+        })
+        .catch((err) => console.error(`❌ Postback fetch error: ${err}`));
 
       // TODO: 更新数据库、发送确认邮件、开通课程权限等
     } else if (status === "failed") {
