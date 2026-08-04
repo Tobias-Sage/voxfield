@@ -6,12 +6,14 @@ const WALLETPLUG_API_URL = "https://walletplug.com/api/v1/initiate-payment";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { planName, isAnnual, amount, currency, userEmail } = body;
+    const { planName, isAnnual, amount, currency, userEmail, clickId } = body;
 
-    // 生成唯一订单号
-    const refTrx = `VOX-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+    // 生成唯一订单号，包含 click_id 以便后续提取
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    // 如果 clickId 存在，则放入 ref_trx，否则省略
+    const refTrx = clickId ? `VOX-${clickId}-${timestamp}-${random}` : `VOX-${timestamp}-${random}`;
 
-    // 构建请求参数
     const payload = {
       payment_amount: amount,
       currency_code: currency || "USD",
@@ -25,7 +27,6 @@ export async function POST(request: NextRequest) {
       allow_payment_methods: ["card", "mobile_money", "bank_transfer"],
     };
 
-    // 调用 WalletPlug API
     const response = await fetch(WALLETPLUG_API_URL, {
       method: "POST",
       headers: {
