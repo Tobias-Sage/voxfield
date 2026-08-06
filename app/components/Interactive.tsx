@@ -14,6 +14,12 @@ import {
 
 const formatPrice = (price: number) => price.toFixed(2);
 
+// 月度套餐对应的订阅 UUID 映射
+const SUBSCRIPTION_UUIDS: Record<string, string> = {
+  "Essential Speaker": "5a26cd61-a180-4002-ab57-e704fffd6501",
+  "Stage Influence": "700e5ff0-8e66-4d77-8166-74691871a845",
+};
+
 export function PricingSection() {
   const [annual, setAnnual] = useState(false);
 
@@ -47,6 +53,8 @@ export function PricingSection() {
         <div className="pricing-grid">
           {plans.map((plan) => {
             const monthlyEquivalent = plan.annual / 12;
+            const subscriptionUuid = SUBSCRIPTION_UUIDS[plan.name] || null;
+
             return (
               <article
                 className={plan.featured ? "pricing-card featured" : "pricing-card"}
@@ -74,43 +82,53 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                  onClick={async () => {
-                    try {
-                      // 获取 click_id 从 URL 参数
-                      const searchParams = new URLSearchParams(window.location.search);
-                      const clickId = searchParams.get('click_id') || '';
-                
-                      const price = annual ? plan.annual : plan.monthly;
-                      const response = await fetch("/api/payment/initiate", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          planName: plan.name,
-                          isAnnual: annual,
-                          amount: price,
-                          currency: "USD",
-                          userEmail: "",
-                          clickId: clickId,
-                        }),
-                      });
-                
-                      const result = await response.json();
-                
-                      if (result.success && result.paymentUrl) {
-                        window.location.href = result.paymentUrl;
-                      } else {
-                        alert("Failed to initiate payment. Please try again.");
+
+                {/* ===== 月度套餐：跳转订阅链接；年度套餐：调用一次性支付 API ===== */}
+                {!annual && subscriptionUuid ? (
+                  <Link
+                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
+                    href={`https://walletplug.com/subscribe/${subscriptionUuid}`}
+                  >
+                    Choose This Plan
+                  </Link>
+                ) : (
+                  <button
+                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
+                    onClick={async () => {
+                      try {
+                        const searchParams = new URLSearchParams(window.location.search);
+                        const clickId = searchParams.get("click_id") || "";
+
+                        const price = annual ? plan.annual : plan.monthly;
+                        const response = await fetch("/api/payment/initiate", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            planName: plan.name,
+                            isAnnual: annual,
+                            amount: price,
+                            currency: "USD",
+                            userEmail: "",
+                            clickId: clickId,
+                          }),
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success && result.paymentUrl) {
+                          window.location.href = result.paymentUrl;
+                        } else {
+                          alert("Failed to initiate payment. Please try again.");
+                        }
+                      } catch (error) {
+                        console.error("Payment initiation error:", error);
+                        alert("Something went wrong. Please try again.");
                       }
-                    } catch (error) {
-                      console.error("Payment initiation error:", error);
-                      alert("Something went wrong. Please try again.");
-                    }
-                  }}
-                >
-                  Choose This Plan
-                </button>
+                    }}
+                  >
+                    Choose This Plan
+                  </button>
+                )}
               </article>
             );
           })}
