@@ -32,13 +32,36 @@ export async function POST(request: NextRequest) {
     console.log("✅ Webhook verified");
 
     const payload = JSON.parse(rawBody);
-    const { status, data } = payload;
+    const { type, status, data } = payload;
 
-    if (status === "completed") {
-      console.log(`✅ Payment completed: ${data.ref_trx}`);
+    // ----- 判断是否需要发送 postback -----
+    let shouldSendPostback = false;
+    let refTrx = "";
+    let amount = 0;
 
-      // --- 发送 Postback 回传 ---
-      const refTrx = data.ref_trx || "";
+    // 场景1：一次性支付完成（年度套餐）
+    if (status === "completed" && data?.ref_trx) {
+      shouldSendPostback = true;
+      refTrx = data.ref_trx;
+      amount = data.amount || 0;
+      console.log(`✅ One-time payment completed: ${refTrx}`);
+    }
+
+    // 场景2：订阅首次激活（月度套餐首次订阅成功）
+    if (type === "subscription.activated" && data?.subscription?.ref_trx) {
+      shouldSendPostback = true;
+      refTrx = data.subscription.ref_trx;
+      amount = data.subscription.amount || 0;
+      console.log(`✅ Subscription activated (first payment): ${refTrx}`);
+    }
+
+    // 如果是续费成功（invoice.paid），不发送 postback，只记录日志
+    if (type === "invoice.paid" && data?.invoice) {
+      console.log(`ℹ️ Subscription renewal (no postback): ${data.invoice.id}`);
+    }
+
+    // ----- 发送 postback -----
+    if (shouldSendPostback && refTrx) {
       let clickId = "";
       if (refTrx.startsWith("VOX-")) {
         const parts = refTrx.split("-");
@@ -50,23 +73,17 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      const postbackUrl = `http://newmobi.fuse-cloud.com/pb?tid=${clickId || "unknown"}&s1=${data.amount || 0}`;
-      console.log(`📤 Postback: ${postbackUrl}`);
+      const postbackUrl = `http://newmobi.fuse-cloud.com/pb?tid=${clickId || "unknown"}&s1=${amount}`;
+      console.log(`📤 Sending postback: ${postbackUrl}`);
 
       // 异步发送，不阻塞响应
       fetch(postbackUrl, { method: "GET" })
         .then(async (res) => {
           const text = await res.text();
-          console.log(`✅ Postback status: ${res.status}`);
-          if (text) console.log(`📦 Postback response: ${text}`);
+          console.log(`✅ Postback response status: ${res.status}`);
+          if (text) console.log(`📦 Postback response body: ${text}`);
         })
-        .catch((err) => console.error(`❌ Postback error: ${err}`));
-
-      // TODO: 开通用户权限、更新数据库、发送确认邮件
-    } else if (status === "failed") {
-      console.log(`❌ Payment failed: ${data.ref_trx}`);
-    } else if (status === "cancelled") {
-      console.log(`⏹️ Payment cancelled: ${data.ref_trx}`);
+        .catch((err) => console.error(`❌ Postback fetch error: ${err}`));
     }
 
     return NextResponse.json({ received: true });
