@@ -32,36 +32,14 @@ export async function POST(request: NextRequest) {
     console.log("✅ Webhook verified");
 
     const payload = JSON.parse(rawBody);
-    const { type, status, data } = payload;
+    const { status, data } = payload;
 
-    // ----- 判断是否需要发送 postback -----
-    let shouldSendPostback = false;
-    let refTrx = "";
-    let amount = 0;
+    // 仅处理一次性支付完成事件
+    if (status === "completed") {
+      console.log(`✅ Payment completed: ${data.ref_trx}`);
 
-    // 场景1：一次性支付完成（年度套餐）
-    if (status === "completed" && data?.ref_trx) {
-      shouldSendPostback = true;
-      refTrx = data.ref_trx;
-      amount = data.amount || 0;
-      console.log(`✅ One-time payment completed: ${refTrx}`);
-    }
-
-    // 场景2：订阅首次激活（月度套餐首次订阅成功）
-    if (type === "subscription.activated" && data?.subscription?.ref_trx) {
-      shouldSendPostback = true;
-      refTrx = data.subscription.ref_trx;
-      amount = data.subscription.amount || 0;
-      console.log(`✅ Subscription activated (first payment): ${refTrx}`);
-    }
-
-    // 如果是续费成功（invoice.paid），不发送 postback，只记录日志
-    if (type === "invoice.paid" && data?.invoice) {
-      console.log(`ℹ️ Subscription renewal (no postback): ${data.invoice.id}`);
-    }
-
-    // ----- 发送 postback -----
-    if (shouldSendPostback && refTrx) {
+      // --- 发送 Postback 回传（如果不需要，可以注释掉下面这段） ---
+      const refTrx = data.ref_trx || "";
       let clickId = "";
       if (refTrx.startsWith("VOX-")) {
         const parts = refTrx.split("-");
@@ -73,7 +51,7 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      const postbackUrl = `http://newmobi.fuse-cloud.com/pb?tid=${clickId || "unknown"}&s1=${amount}`;
+      const postbackUrl = `http://newmobi.fuse-cloud.com/pb?tid=${clickId || "unknown"}&s1=${data.amount || 0}`;
       console.log(`📤 Sending postback: ${postbackUrl}`);
 
       // 异步发送，不阻塞响应
@@ -84,6 +62,15 @@ export async function POST(request: NextRequest) {
           if (text) console.log(`📦 Postback response body: ${text}`);
         })
         .catch((err) => console.error(`❌ Postback fetch error: ${err}`));
+
+      // TODO: 更新数据库、发送确认邮件、开通权限等
+    } else if (status === "failed") {
+      console.log(`❌ Payment failed: ${data.ref_trx}`);
+    } else if (status === "cancelled") {
+      console.log(`⏹️ Payment cancelled: ${data.ref_trx}`);
+    } else {
+      // 其他事件（如订阅相关）只记录日志，不做任何处理
+      console.log(`ℹ️ Webhook received other event: ${status || payload.type}`);
     }
 
     return NextResponse.json({ received: true });
