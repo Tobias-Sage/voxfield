@@ -1,44 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function CheckoutTestPage() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [cardUrl, setCardUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [amount, setAmount] = useState("19.99");
-  const [description, setDescription] = useState("Test Embed Payment");
 
-  const handleInitiatePayment = async () => {
-    setLoading(true);
-    setError(null);
-    setCardUrl(null);
+  // 固定金额和描述
+  const AMOUNT = 19.99;
+  const DESCRIPTION = "Essential Speaker (Monthly)";
 
-    try {
-      const response = await fetch("/api/payment/test-initiate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: parseFloat(amount),
-          currency: "USD",
-          description: description,
-        }),
-      });
+  useEffect(() => {
+    const initiatePayment = async () => {
+      try {
+        const response = await fetch("/api/payment/test-initiate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: AMOUNT,
+            currency: "USD",
+            description: DESCRIPTION,
+          }),
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      if (result.success && result.cardUrl) {
-        setCardUrl(result.cardUrl);
-      } else {
-        setError(result.error || "Failed to initiate payment");
+        if (result.success && result.cardUrl) {
+          setCardUrl(result.cardUrl);
+        } else {
+          setError(result.error || "Failed to initiate payment");
+        }
+      } catch (err) {
+        setError("Network error. Please try again.");
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    initiatePayment();
+  }, []);
 
   return (
     <main style={{ 
@@ -56,7 +58,7 @@ export default function CheckoutTestPage() {
           marginBottom: "2rem"
         }}>
           <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", margin: 0 }}>
-            🧪 Checkout Test
+            💳 Checkout
           </h1>
           <Link 
             href="/" 
@@ -79,107 +81,69 @@ export default function CheckoutTestPage() {
           fontSize: "0.9rem",
           color: "#0d47a1"
         }}>
-          ⚡ 独立测试页面 · 不影响现有支付功能 · 使用沙箱环境测试
+          ⚡ 沙箱测试环境 · 固定金额 $19.99 · 不会产生真实扣费
         </div>
 
-        {/* 如果还没有 cardUrl，显示初始化表单 */}
-        {!cardUrl && (
+        {/* 加载状态 */}
+        {loading && (
+          <div style={{ 
+            background: "white", 
+            padding: "3rem 2rem", 
+            borderRadius: "12px",
+            textAlign: "center",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+          }}>
+            <div style={{ 
+              width: "40px", 
+              height: "40px", 
+              border: "3px solid #e0e0e0",
+              borderTop: "3px solid #1a1a1a",
+              borderRadius: "50%",
+              animation: "spin 0.8s linear infinite",
+              margin: "0 auto 1rem"
+            }} />
+            <p style={{ color: "#666", margin: 0 }}>Loading secure checkout...</p>
+            <style>{`
+              @keyframes spin {
+                to { transform: rotate(360deg); }
+              }
+            `}</style>
+          </div>
+        )}
+
+        {/* 错误状态 */}
+        {!loading && error && (
           <div style={{ 
             background: "white", 
             padding: "2rem", 
             borderRadius: "12px",
+            textAlign: "center",
             boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
           }}>
-            <h2 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-              Start a Test Payment
-            </h2>
-            <p style={{ color: "#666", fontSize: "0.9rem", marginBottom: "1.5rem" }}>
-              输入金额后点击按钮，将加载嵌入式支付表单。
-            </p>
-
-            <div style={{ marginBottom: "1rem" }}>
-              <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "600", marginBottom: "0.25rem" }}>
-                Amount (USD)
-              </label>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                step="0.01"
-                min="1"
-                style={{
-                  width: "100%",
-                  padding: "0.6rem 0.8rem",
-                  border: "1.5px solid #e0e0e0",
-                  borderRadius: "8px",
-                  fontSize: "1rem",
-                }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "1.5rem" }}>
-              <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "600", marginBottom: "0.25rem" }}>
-                Description
-              </label>
-              <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "0.6rem 0.8rem",
-                  border: "1.5px solid #e0e0e0",
-                  borderRadius: "8px",
-                  fontSize: "1rem",
-                }}
-              />
-            </div>
-
-            {error && (
-              <div style={{ 
-                background: "#fde8e8", 
-                color: "#c0392b", 
-                padding: "0.75rem", 
-                borderRadius: "8px",
-                marginBottom: "1rem",
-                fontSize: "0.9rem"
-              }}>
-                ❌ {error}
-              </div>
-            )}
-
-            <button
-              onClick={handleInitiatePayment}
-              disabled={loading}
+            <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>❌</div>
+            <h2 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>Something went wrong</h2>
+            <p style={{ color: "#666", fontSize: "0.9rem", marginBottom: "1.5rem" }}>{error}</p>
+            <Link 
+              href="/checkout-test" 
               style={{
-                width: "100%",
-                padding: "0.75rem",
+                padding: "0.6rem 1.5rem",
                 background: "#1a1a1a",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
-                fontSize: "1rem",
-                fontWeight: "600",
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.6 : 1,
+                cursor: "pointer",
+                textDecoration: "none",
+                fontSize: "0.9rem",
+                display: "inline-block"
               }}
             >
-              {loading ? "Initializing..." : "💳 Load Embedded Checkout"}
-            </button>
-
-            <p style={{ 
-              marginTop: "1rem", 
-              fontSize: "0.8rem", 
-              color: "#999",
-              textAlign: "center"
-            }}>
-              🔒 支付表单由 WalletPlug 安全托管 · 不存储卡片信息
-            </p>
+              Try Again
+            </Link>
           </div>
         )}
 
-        {/* 如果已有 cardUrl，显示嵌入式 iframe */}
-        {cardUrl && (
+        {/* 支付表单（iframe） */}
+        {!loading && !error && cardUrl && (
           <div style={{ 
             background: "white", 
             padding: "1.5rem", 
@@ -190,27 +154,14 @@ export default function CheckoutTestPage() {
               display: "flex", 
               justifyContent: "space-between", 
               alignItems: "center",
-              marginBottom: "1rem"
+              marginBottom: "0.5rem"
             }}>
               <h2 style={{ fontSize: "1.1rem", margin: 0 }}>
-                💳 Complete Payment
+                Complete Payment
               </h2>
-              <button
-                onClick={() => setCardUrl(null)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#666",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  textDecoration: "underline"
-                }}
-              >
-                ← Back
-              </button>
             </div>
-            <p style={{ color: "#666", fontSize: "0.85rem", marginBottom: "1rem" }}>
-              {description} · ${amount} USD
+            <p style={{ color: "#666", fontSize: "0.9rem", marginBottom: "1rem" }}>
+              {DESCRIPTION} · <strong>${AMOUNT.toFixed(2)} USD</strong>
             </p>
             <iframe
               src={cardUrl}
@@ -230,7 +181,7 @@ export default function CheckoutTestPage() {
               color: "#aaa",
               textAlign: "center"
             }}>
-              🔒 256-bit SSL 加密 · PCI DSS 合规 · 卡片信息由 WalletPlug 安全处理
+              🔒 256-bit SSL 加密 · PCI DSS 合规 · 卡片信息由 WalletPlug 安全托管
             </p>
           </div>
         )}
