@@ -1,17 +1,26 @@
-// app/api/payment/initiate/route.ts
 import { NextRequest, NextResponse } from "next/server";
+
+// ===== 读取支付开关环境变量（后端防护） =====
+const PAYMENT_ENABLED = process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== "false";
 
 const WALLETPLUG_API_URL = "https://walletplug.com/api/v1/initiate-payment";
 
 export async function POST(request: NextRequest) {
+  // ===== 支付开关检查 =====
+  if (!PAYMENT_ENABLED) {
+    return NextResponse.json(
+      { error: "Payment is temporarily disabled" },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { planName, isAnnual, amount, currency, userEmail, clickId } = body;
 
-    // 生成唯一订单号，包含 click_id 以便后续提取
+    // 生成唯一订单号
     const timestamp = Date.now();
     const random = Math.random().toString(36).substring(2, 8);
-    // 如果 clickId 存在，则放入 ref_trx，否则省略
     const refTrx = clickId ? `VOX-${clickId}-${timestamp}-${random}` : `VOX-${timestamp}-${random}`;
 
     const payload = {
