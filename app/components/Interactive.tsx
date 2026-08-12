@@ -17,6 +17,9 @@ const formatPrice = (price: number) => price.toFixed(2);
 export function PricingSection() {
   const [annual, setAnnual] = useState(false);
 
+  // ===== 读取支付开关环境变量 =====
+  const isPaymentEnabled = process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== "false";
+
   return (
     <section className="section section-dark" id="plans" aria-labelledby="plans-title">
       <div className="shell">
@@ -74,43 +77,54 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-                {/* 统一使用一次性支付按钮 */}
-                <button
-                  className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                  onClick={async () => {
-                    try {
-                      const searchParams = new URLSearchParams(window.location.search);
-                      const clickId = searchParams.get('click_id') || '';
-                
-                      const price = annual ? plan.annual : plan.monthly;
-                      const response = await fetch("/api/payment/initiate", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          planName: plan.name,
-                          isAnnual: annual,
-                          amount: price,
-                          currency: "USD",
-                          userEmail: "",
-                          clickId: clickId,
-                        }),
-                      });
-                
-                      const result = await response.json();
-                
-                      if (result.success && result.paymentUrl) {
-                        window.location.href = result.paymentUrl;
-                      } else {
-                        alert("Failed to initiate payment. Please try again.");
+
+                {/* ===== 支付按钮 ===== */}
+                {isPaymentEnabled ? (
+                  <button
+                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
+                    onClick={async () => {
+                      try {
+                        const searchParams = new URLSearchParams(window.location.search);
+                        const clickId = searchParams.get('click_id') || '';
+                  
+                        const price = annual ? plan.annual : plan.monthly;
+                        const response = await fetch("/api/payment/initiate", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            planName: plan.name,
+                            isAnnual: annual,
+                            amount: price,
+                            currency: "USD",
+                            userEmail: "",
+                            clickId: clickId,
+                          }),
+                        });
+                  
+                        const result = await response.json();
+                  
+                        if (result.success && result.paymentUrl) {
+                          window.location.href = result.paymentUrl;
+                        } else {
+                          alert("Failed to initiate payment. Please try again.");
+                        }
+                      } catch (error) {
+                        console.error("Payment initiation error:", error);
+                        alert("Something went wrong. Please try again.");
                       }
-                    } catch (error) {
-                      console.error("Payment initiation error:", error);
-                      alert("Something went wrong. Please try again.");
-                    }
-                  }}
-                >
-                  Choose This Plan
-                </button>
+                    }}
+                  >
+                    Choose This Plan
+                  </button>
+                ) : (
+                  <button
+                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
+                    disabled
+                    style={{ opacity: 0.5, cursor: "not-allowed" }}
+                  >
+                    Temporarily Unavailable
+                  </button>
+                )}
               </article>
             );
           })}
@@ -119,9 +133,6 @@ export function PricingSection() {
     </section>
   );
 }
-
-// 以下所有其他函数（FaqList, CourseCard, CourseExplorer, InsightGrid, ContactForm）保持不变
-// 为了完整性，这里提供所有函数的完整代码，可以直接复制替换整个文件
 
 export function FaqList() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
