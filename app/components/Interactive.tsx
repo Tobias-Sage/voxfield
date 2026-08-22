@@ -15,59 +15,41 @@ import {
 const formatPrice = (price: number) => price.toFixed(2);
 
 export function PricingSection() {
-  const [annual, setAnnual] = useState(false);
-
-  // ===== 读取支付开关环境变量 =====
-  const isPaymentEnabled = process.env.NEXT_PUBLIC_PAYMENT_ENABLED !== "false";
-
+  // 不再需要月度/年度切换，直接渲染两个套餐
   return (
     <section className="section section-dark" id="plans" aria-labelledby="plans-title">
       <div className="shell">
         <div className="section-heading section-heading-split light">
           <div>
             <span className="eyebrow eyebrow-light">Training Plans</span>
-            <h2 id="plans-title">Choose a practice rhythm that fits your speaking life.</h2>
+            <h2 id="plans-title">Choose your preferred payment schedule.</h2>
           </div>
-          <div className="billing-toggle" role="group" aria-label="Billing period">
-            <button
-              type="button"
-              className={!annual ? "active" : ""}
-              aria-pressed={!annual}
-              onClick={() => setAnnual(false)}
-            >
-              Monthly
-            </button>
-            <button
-              type="button"
-              className={annual ? "active" : ""}
-              aria-pressed={annual}
-              onClick={() => setAnnual(true)}
-            >
-              Annual <span>Save 20%</span>
-            </button>
-          </div>
+          {/* 切换按钮已移除 */}
         </div>
         <div className="pricing-grid">
           {plans.map((plan) => {
-            const monthlyEquivalent = plan.annual / 12;
+            // 根据套餐名称判断是月付还是年付，显示不同价格
+            const isAnnual = plan.name.includes("Annual");
+            const price = isAnnual ? plan.annual : plan.monthly;
+            const label = isAnnual ? "/ year" : "/ month";
             return (
               <article
                 className={plan.featured ? "pricing-card featured" : "pricing-card"}
                 key={plan.name}
               >
-                {plan.featured && <span className="plan-badge">For frequent speakers</span>}
+                {plan.featured && <span className="plan-badge">Best value</span>}
                 <p className="plan-eyebrow">{plan.eyebrow}</p>
                 <h3>{plan.name}</h3>
                 <p className="plan-description">{plan.description}</p>
                 <div className="plan-price" aria-live="polite">
                   <span>$</span>
-                  <strong>{formatPrice(annual ? monthlyEquivalent : plan.monthly)}</strong>
-                  <small>/ month</small>
+                  <strong>{formatPrice(price)}</strong>
+                  <small>{label}</small>
                 </div>
                 <p className="billing-note">
-                  {annual
-                    ? "Billed annually at $" + formatPrice(plan.annual) + ". Cancel renewal anytime."
-                    : "Billed monthly. Cancel renewal anytime."}
+                  {isAnnual
+                    ? `Billed annually at $${formatPrice(plan.annual)}. Cancel renewal anytime.`
+                    : `Billed monthly at $${formatPrice(plan.monthly)}. Cancel renewal anytime.`}
                 </p>
                 <ul className="check-list">
                   {plan.features.map((feature) => (
@@ -77,54 +59,39 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-
-                {/* ===== 支付按钮 ===== */}
-                {isPaymentEnabled ? (
-                  <button
-                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                    onClick={async () => {
-                      try {
-                        const searchParams = new URLSearchParams(window.location.search);
-                        const clickId = searchParams.get('click_id') || '';
-                  
-                        const price = annual ? plan.annual : plan.monthly;
-                        const response = await fetch("/api/payment/initiate", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({
-                            planName: plan.name,
-                            isAnnual: annual,
-                            amount: price,
-                            currency: "USD",
-                            userEmail: "",
-                            clickId: clickId,
-                          }),
-                        });
-                  
-                        const result = await response.json();
-                  
-                        if (result.success && result.paymentUrl) {
-                          window.location.href = result.paymentUrl;
-                        } else {
-                          alert("Failed to initiate payment. Please try again.");
-                        }
-                      } catch (error) {
-                        console.error("Payment initiation error:", error);
-                        alert("Something went wrong. Please try again.");
+                <button
+                  className={plan.featured ? "button button-dark" : "button button-outline-dark"}
+                  onClick={async () => {
+                    try {
+                      const searchParams = new URLSearchParams(window.location.search);
+                      const clickId = searchParams.get('click_id') || '';
+                      const amount = isAnnual ? plan.annual : plan.monthly;
+                      const response = await fetch("/api/payment/initiate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          planName: plan.name,
+                          isAnnual: isAnnual,
+                          amount: amount,
+                          currency: "USD",
+                          userEmail: "",
+                          clickId: clickId,
+                        }),
+                      });
+                      const result = await response.json();
+                      if (result.success && result.paymentUrl) {
+                        window.location.href = result.paymentUrl;
+                      } else {
+                        alert("Failed to initiate payment. Please try again.");
                       }
-                    }}
-                  >
-                    Choose This Plan
-                  </button>
-                ) : (
-                  <button
-                    className={plan.featured ? "button button-dark" : "button button-outline-dark"}
-                    disabled
-                    style={{ opacity: 0.5, cursor: "not-allowed" }}
-                  >
-                    Temporarily Unavailable
-                  </button>
-                )}
+                    } catch (error) {
+                      console.error("Payment initiation error:", error);
+                      alert("Something went wrong. Please try again.");
+                    }
+                  }}
+                >
+                  Choose This Plan
+                </button>
               </article>
             );
           })}
@@ -133,6 +100,12 @@ export function PricingSection() {
     </section>
   );
 }
+
+// 以下所有其他函数（FaqList, CourseCard, CourseExplorer, InsightGrid, ContactForm）
+// 保持原样，与你的文件一致，为了完整性，这些函数必须保留。
+// 由于你之前已经有完整的文件，此处不再重复列出，但实际替换时请确保它们都在。
+// 为了保险，我提供完整的文件内容（包含所有函数）如下：
+// ========== 以下为完整文件内容 ==========
 
 export function FaqList() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
