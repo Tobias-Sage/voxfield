@@ -179,11 +179,12 @@ export const insights: Insight[] = [
 
 export const plans: Plan[] = [
   {
-    name: "Essential Speaker",
+    name: "Essential Speaker (Monthly)",
     eyebrow: "Start with clarity",
     monthly: 19.99,
-    annual: 191.9,
+    annual: 239.88, // 12个月总额，用于计算
     description: "For professionals who want stronger briefings, presentations, and everyday communication.",
+    featured: false,
     features: [
       "All foundation and advanced video lessons",
       "One guided speaking drill each week",
@@ -192,18 +193,17 @@ export const plans: Plan[] = [
     ],
   },
   {
-    name: "Stage Influence",
-    eyebrow: "Bring your skills into the room",
-    monthly: 49.99,
-    annual: 479.9,
-    description: "For managers, sales teams, trainers, and frequent public speakers.",
+    name: "Essential Speaker (Annual)",
+    eyebrow: "Commit to growth",
+    monthly: 199.99,
+    annual: 199.99,
+    description: "Save on the full year of Essential Speaker training.",
     featured: true,
     features: [
-      "Everything in Essential Speaker",
-      "Pitching and high-pressure Q&A courses",
-      "Two live case breakdowns each month",
-      "Personal presentation review checklist",
-      "Early access to new courses",
+      "Everything in Monthly plan",
+      "Two months free (save $39.98)",
+      "Priority support",
+      "Exclusive bonus content",
     ],
   },
 ];
